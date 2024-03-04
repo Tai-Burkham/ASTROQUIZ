@@ -17,9 +17,7 @@ ship_image = pygame.image.load("Game Files/assets/images/Spaceship_1.png")
 ship_image = pygame.transform.scale(ship_image, (100, 100))
 ship_image.set_colorkey(BLACK)
 
-
-
-# Temporary ship representation
+# Draws the ship on the screen at given location and angle
 def draw_ship(screen, x, y, angle):
     rotated_ship = pygame.transform.rotate(ship_image, angle - 90)
     ship_rect = rotated_ship.get_rect(center=(x, y))
@@ -28,7 +26,7 @@ def draw_ship(screen, x, y, angle):
 
 def game(screen):
     game_over = False
-    global score, health, forward, reverse
+    global score, health
 
     # Variables
     # Ship movement
@@ -41,7 +39,7 @@ def game(screen):
     left_turn = False
     right_turn = False
     angle = 90
-    # Ship location
+    # Ship starting location
     x_coord = WIDTH // 2
     y_coord = HEIGHT // 2
 
@@ -75,18 +73,8 @@ def game(screen):
                     left_turn = False
                     right_turn = False
         
-        # Acceleration / Deceleration
-        # if forward:
-        #     if y_speed <= 5:
-        #         y_speed += 1
-        # elif y_speed > 0:
-        #     y_speed -= 1  
-        # if reverse:
-        #     if y_speed >= 0:
-        #         y_speed -= 1
-        # elif y_speed < 0:
-        #     y_speed += 1
-        
+        # Ship Movement
+                    
         # Turning
         if left_turn:
             angle -= 2
@@ -97,57 +85,25 @@ def game(screen):
             if angle > 360:
                 angle = 0
 
+        # Acceleration / Deceleration
         if forward:
-            # Calculate components of velocity vector based on ship's angle
-            # if x_speed < MAX_SPEED and x_speed > -MAX_SPEED:
-            #     acceleration_x += ACCELERATION * math.cos(math.radians(angle))
-            #     x_speed = acceleration_x
-            #     if x_speed > MAX_SPEED:
-            #         x_speed = MAX_SPEED - 0.1
-            #     elif x_speed < -MAX_SPEED:
-            #         x_speed = -MAX_SPEED + 0.1
-            # if y_speed < MAX_SPEED and y_speed > -MAX_SPEED:
-            #     acceleration_y += ACCELERATION * -math.sin(math.radians(angle))
-            #     y_speed = acceleration_y
-            #     if y_speed > MAX_SPEED:
-            #         y_speed = MAX_SPEED - 0.1
-            #     elif y_speed < -MAX_SPEED:
-            #         y_speed = -MAX_SPEED + 0.1
-
+            # controls acceleration based on direction ship is pointing when giving it the gas
             acceleration_x = ACCELERATION * math.cos(math.radians(angle))
             acceleration_y = ACCELERATION * -math.sin(math.radians(angle))
             x_speed += acceleration_x
             y_speed += acceleration_y
 
+            # Puts a speed limit in for the ship
             speed = math.sqrt(x_speed ** 2 + y_speed ** 2)
             if speed > MAX_SPEED:
                 ratio = MAX_SPEED / speed
                 x_speed *= ratio
                 y_speed *= ratio
         elif reverse:
-            # For simplicity, reversing will simply reduce the ship's speed
+            # For simplicity, reversing will simply reduce the ship's speed, We can change it to actually reverse if we think we need it later
             x_speed *= 0.9
             y_speed *= 0.9
-
-        
-
-        # Ship Movement
-        # Horizontal movement within window, bounces back when goes outside window
-        # if x_coord < WIDTH - 110 and x_coord > 0:
-        #     x_coord += x_speed
-        # elif x_coord >= WIDTH - 110:
-        #     x_coord -= 1
-        # elif x_coord <= 0:
-        #     x_coord += 1
-        
-        # Vertical movement within window, bounces back when goes outside window
-        # if y_coord < HEIGHT - 81 and y_coord > 0:
-        #     y_coord -= y_speed
-        # elif y_coord >= HEIGHT - 81:
-        #     y_coord -= 1
-        # elif y_coord <= 0:
-        #     y_coord += 1
-                
+               
         x_coord += x_speed
         y_coord += y_speed
 

@@ -1,5 +1,4 @@
 import pygame
-import random
 import game
 
 pygame.init()
@@ -22,6 +21,7 @@ questions = [
 screen = pygame.display.set_mode((WIDTH, HEIGHT))
 pygame.display.set_caption("ASTROQUIZ")
 
+# We can make this clickable once we have the design of the menu page more complete
 def main_menu():
     # Display main menu options
     screen.fill(WHITE)
