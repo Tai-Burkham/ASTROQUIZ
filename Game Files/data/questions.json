@@ -1,0 +1,29 @@
+{
+    "ethics" : [
+        {
+            "question": "This is Question 1",
+            "choice_1": "If this is",
+            "choice_2": "going to be",
+            "choice_3": "a multiple choice question",
+            "choice_4": "then here goes the text."
+        },
+        {
+            "question": "This is question 2",
+            "choice_1": "True or false",
+            "choice_2": "True or false"
+        },
+        {
+            "question": "This is question 3",
+            "choice_1": "True or false",
+            "choice_2": "True or false"
+        }
+    ],
+    "Other Questions" : [
+        {
+
+        },
+        {
+
+        }
+    ]
+}
