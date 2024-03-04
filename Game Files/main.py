@@ -49,6 +49,8 @@ def main():
     running = True
     while running:
         main_menu()
+
+        # Once we have the menu design complete we can change from pushing buttons for menu items to clickon on them with the mouse
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 running = False
