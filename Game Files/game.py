@@ -73,8 +73,7 @@ def game(screen):
                     left_turn = False
                     right_turn = False
         
-        # Ship Movement
-                    
+        # Ship Movement         
         # Turning
         if left_turn:
             angle -= 2
@@ -109,15 +108,16 @@ def game(screen):
 
         x_coord %= WIDTH
         y_coord %= HEIGHT
+ 
+        # astroid generation and movement goes here
 
-        
 
         screen.fill(BLACK)
 
         # Update game logic
         # interactions with astroids between ship
 
-
+        
 
         # Draw everything
 
