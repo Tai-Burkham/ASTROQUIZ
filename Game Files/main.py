@@ -4,7 +4,7 @@ import game
 pygame.init()
 
 # Window size and colors
-WIDTH, HEIGHT = 1200, 800
+WIDTH, HEIGHT = 900, 600
 WHITE = (255, 255, 255)
 BLACK = (0, 0, 0)
 FONT = pygame.font.Font(None, 36)
