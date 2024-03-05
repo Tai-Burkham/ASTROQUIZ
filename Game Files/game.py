@@ -71,7 +71,7 @@ def moveShip(forward, reverse, left_turn, right_turn):
 # Main game method
 def game(screen):
     game_over = False
-    global x_speed, y_speed, x_coord, y_coord, angle, acceleration_x, acceleration_y
+    global x_speed, y_speed, x_coord, y_coord, angle
 
     # Initial movement variables
     forward = False
@@ -118,7 +118,7 @@ def game(screen):
                
  
         # astroid generation and movement goes here
-
+  
 
         screen.fill(BLACK)
 
