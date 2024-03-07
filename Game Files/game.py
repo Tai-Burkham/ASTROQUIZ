@@ -1,6 +1,6 @@
 import pygame
 import math
-from main import WIDTH, HEIGHT
+from settings import WIDTH, HEIGHT
 
 # Constants
 BLACK = (0, 0, 0)
