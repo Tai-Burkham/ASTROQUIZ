@@ -39,7 +39,9 @@ def outline_text(text, height) :
     screen.blit(rendered_text, (WIDTH // 2 - rendered_text.get_width() // 2, height))
 
     button_rect = pygame.Rect(WIDTH // 2 - rendered_text.get_width() // 2 - 10, height - 7, rendered_text.get_width() + 20, 40)
-    pygame.draw.rect(screen, (255, 255, 255, 0), button_rect, 2)
+    pygame.draw.rect(screen, (255, 255, 255, 0), button_rect, 1)
+
+    return button_rect
 
 
 # We can make this clickable once we have the design of the menu page more complete
@@ -51,22 +53,24 @@ def main_menu():
     # The game title needs to be drawn on the menu image so it will not look like this when done
     outline_text("ASTROQUIZ", 100)
     
-    outline_text("Play Game (Press 'P')", 200)
+    play_button_rect = outline_text("Play Game", 200)
 
-    outline_text("High Scores (Press 'H')", 250)
+    high_scores_button_rect = outline_text("High Scores", 250)
 
-    outline_text("Edit Questions (Press 'E')", 300)
+    edit_questions_button_rect = outline_text("Edit Questions", 300)
     
-    outline_text("Edit Settings (Press 'S')", 350)
+    edit_settings_button_rect = outline_text("Edit Settings", 350)
 
-    outline_text("Quit (Press 'Q')", 400)
+    quit_button_rect = outline_text("Quit", 400)
     
     pygame.display.flip()
+
+    return play_button_rect, high_scores_button_rect, edit_questions_button_rect, edit_settings_button_rect, quit_button_rect
 
 def main():
     running = True
     while running:
-        main_menu()
+        play_button_rect, high_scores_button_rect, edit_questions_button_rect, edit_settings_button_rect, quit_button_rect = main_menu()
 
         # Once we have the menu design complete we can change from pushing buttons for menu items to clickon on them with the mouse
         for event in pygame.event.get():
@@ -86,6 +90,9 @@ def main():
                     pass
                 elif event.key == pygame.K_q:
                     pygame.quit()
+            elif event.type == pygame.MOUSEBUTTONDOWN:
+                if play_button_rect.collidepoint(event.pos):
+                    game.game(screen)
 
     pygame.quit()
 
