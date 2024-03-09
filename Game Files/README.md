@@ -2,4 +2,18 @@
 
 The only thing that works right now is play
 
-The ship only moves around the screen right now so doesnt really do much
+The ship an asteroids move around the screen and collide. Nothing other than a collision statement right now. 
+
+### Need to implement:
+-  what happens during collisions
+-  Ship shooting
+-  questions from asteroids
+-  questions overall
+-  questions menu
+-  high score screen
+-  score keeping
+-  health
+-  upgrades
+-  settings screen
+-  more asteroids
+-  background
