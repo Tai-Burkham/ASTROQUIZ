@@ -12,6 +12,8 @@ WHITE = (255, 255, 255)
 
 background_image = pygame.image.load("Images and designs/BG.jpg")
 background_image = pygame.transform.scale(background_image, (WIDTH, HEIGHT))
+game_over_image = pygame.image.load("Game Files/assets/images/youdied.png")
+
 
 ship = Ship()
 ship_group = pygame.sprite.Group()
@@ -23,6 +25,12 @@ num_asteroids = 10
 for _ in range(num_asteroids):
     asteroid = Asteroid()
     asteroid_group.add(asteroid)
+
+
+# Global variable to track player's lives
+ship_lives = 3  # You can adjust this value as needed
+
+
 
 # Define constants for player respawn and invulnerability
 RESPAWN_DURATION = 1  # in seconds
@@ -44,13 +52,13 @@ def respawn_ship(ship):
     ship.x_speed = 0
     ship.y_speed = 0
 
-def handle_collisions(ship, asteroid):
-    """Handle collisions between the ship and asteroids."""
-    global is_invulnerable, invulnerability_start_time
+def handle_collisions(player, asteroids):
+    """Handle collisions between the player and asteroids."""
+    global is_invulnerable, invulnerability_start_time, ship_lives
     
     collisions = []
     if not is_invulnerable:
-        collisions = pygame.sprite.spritecollide(ship, asteroid, False, pygame.sprite.collide_mask)
+        collisions = pygame.sprite.spritecollide(player, asteroids, False, pygame.sprite.collide_mask)
     
     if collisions:
         print("Collision detected!")
@@ -60,6 +68,11 @@ def handle_collisions(ship, asteroid):
             invulnerability_start_time = time.time()
             is_blinking = True
             blink_last_toggle_time = time.time()
+            # Reduce player's lives by 1
+            ship_lives -= 1
+            if ship_lives <= 0:
+                # Set game over flag to True
+                game_over = True
 
 def update_invulnerability():
     """Update player's invulnerability status."""
@@ -121,6 +134,13 @@ def game(screen):
                 elif event.key == pygame.K_a or event.key == pygame.K_d or event.key == pygame.K_LEFT or event.key == pygame.K_RIGHT:
                     left_turn = False
                     right_turn = False
+            
+#trying to fix the video game logic 
+            if game_over and event.key == pygame.K_SPACE:
+                # Reset the game or return to menu
+                game_over = False
+                ship_lives = 3  # Reset player lives
+                # Additional reset logic if needed        
         
         # astroid movement goes here
         for asteroid in asteroid_group:
@@ -136,15 +156,7 @@ def game(screen):
 
          # Update player's invulnerability status
         update_invulnerability()
-        
-        
-
-        #OLD LOGIC I WANT TO KEEP JUST IN CASE
-        # Update game logic
-        # interactions with astroids between ship
-       # collisions = pygame.sprite.spritecollide(ship, asteroid_group, False, pygame.sprite.collide_mask)
-        #if collisions:
-         #   print("Collision detected!")
+    
 
          
 
@@ -157,24 +169,39 @@ def game(screen):
 
         asteroid_group.draw(screen)
         #ship_group.draw(screen)
+
         
          # Draw player only if not invulnerable or blinking
         if not is_invulnerable or (is_invulnerable and is_blinking):
             ship_group.draw(screen)
+
         
         pygame.display.flip()
+
+
+
+        #trying to fix the GAME OVER LOGIC 
+        if game_over == True:
+         screen.fill((0, 0, 0))  # Fill the screen with black
+         screen.blit(game_over_image, (0, 0))  # Draw the game over image
+         pygame.display.flip()
+
+
 
         # Render text surfaces for debugging
         speed_text = font.render(f"Speed: ({ship.x_speed:.2f}, {ship.y_speed:.2f})", True, WHITE)
         angle_text = font.render(f"Angle: {ship.angle}", True, WHITE)
         coord_text = font.render(f"Coords: ({ship.rect.centerx}, {ship.rect.centery})", True, WHITE)
 
+
+
         # Blit text onto the screen
         screen.blit(speed_text, (10, 10))  # Adjust the position as needed
         screen.blit(angle_text, (10, 30))
         screen.blit(coord_text, (10, 50))
 
-        #pygame.display.flip()
+           # If game over, display game over image
+       
 
         # This controls game speed
         clock.tick(30)
