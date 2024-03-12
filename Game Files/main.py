@@ -16,7 +16,7 @@ pygame.display.set_caption("ASTROQUIZ")
 # pygame.display.set_icon(icon_image)
 
 # loads background image
-background_image = pygame.image.load("Game Files/assets/images/menubackground.jpg")
+background_image = pygame.image.load("Images and designs/menubackground title.jpg")
 background_image = pygame.transform.scale(background_image, (s.WIDTH, s.HEIGHT))
 
 # Displays the menu items and returns the clickable boxes
@@ -26,14 +26,14 @@ def main_menu():
     screen.blit(background_image, (0, 0))
 
     # The game title needs to be drawn on the menu image so it will not look like this when done
-    settings.outline_text_w_box(screen, "ASTROQUIZ", 100)
+    #settings.outline_text_w_box(screen, "ASTROQUIZ", 100)
     
     # Creates menu buttons
-    play_button_rect = settings.outline_text_w_box(screen, "Play Game", 200)
-    high_scores_button_rect = settings.outline_text_w_box(screen, "High Scores", 250)
-    edit_questions_button_rect = settings.outline_text_w_box(screen, "Edit Questions", 300)    
-    edit_settings_button_rect = settings.outline_text_w_box(screen, "Edit Settings", 350)
-    quit_button_rect = settings.outline_text_w_box(screen, "Quit", 400) 
+    play_button_rect = settings.outline_text_w_box(screen, "Play Game", 250)
+    high_scores_button_rect = settings.outline_text_w_box(screen, "High Scores", 300)
+    edit_questions_button_rect = settings.outline_text_w_box(screen, "Edit Questions", 350)    
+    edit_settings_button_rect = settings.outline_text_w_box(screen, "Edit Settings", 400)
+    quit_button_rect = settings.outline_text_w_box(screen, "Quit", 450) 
 
     pygame.display.flip()
 
