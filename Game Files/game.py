@@ -1,5 +1,6 @@
 import pygame
 from ship import Ship
+from ship import Laser
 from asteroid import Asteroid
 from pygame.locals import *
 from settings import WIDTH, HEIGHT, FONT
@@ -22,6 +23,7 @@ background_image = pygame.transform.scale(background_image, (WIDTH, HEIGHT))
 ship = Ship()
 ship_group = pygame.sprite.Group()
 ship_group.add(ship)
+
 
 # generate asteroids
 asteroid_group = pygame.sprite.Group()
@@ -138,6 +140,8 @@ def game(screen):
     
     # Game loop
     while True:
+        firing = False
+        laser_group = pygame.sprite.Group()
         while not game_over:
             # Handles events, This is where all mouse and keyboard inputs will be
             for event in pygame.event.get():
@@ -154,6 +158,8 @@ def game(screen):
                         left_turn = True
                     if event.key == pygame.K_d or event.key == pygame.K_RIGHT:
                         right_turn = True
+                    if event.key == pygame.K_SPACE:
+                         firing = True     # Fire laser when spacebar is pressed
                     # Need to impliment:
                     # shooting
                     # Mouse and/or keyboard input for questions
@@ -166,7 +172,8 @@ def game(screen):
                     elif event.key == pygame.K_a or event.key == pygame.K_d or event.key == pygame.K_LEFT or event.key == pygame.K_RIGHT:
                         left_turn = False
                         right_turn = False
-            
+                    if event.key == pygame.K_SPACE:
+                        firing = False
             # astroid movement goes here
             for asteroid in asteroid_group:
                 if isinstance(asteroid, Asteroid):
@@ -174,7 +181,13 @@ def game(screen):
 
             # Ship Movement 
             ship.update(forward, reverse, left_turn, right_turn) 
+             
+            #shoot the lazer
+            laser_group.update()
 
+            if firing:
+             laser = Laser(ship.rect.center, ship.angle)
+             laser_group.add(laser)
                 # Handle collisions
             handle_collisions(ship, asteroid_group)
 
@@ -188,6 +201,7 @@ def game(screen):
 
 
             asteroid_group.draw(screen)
+            laser_group.draw(screen) 
 
             # Draw player only if not invulnerable or blinking
             if not is_invulnerable or (is_invulnerable and is_blinking):
