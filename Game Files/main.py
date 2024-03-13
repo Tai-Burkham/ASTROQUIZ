@@ -24,9 +24,6 @@ def main_menu():
     # Display main menu options
     screen.fill(s.WHITE)
     screen.blit(background_image, (0, 0))
-
-    # The game title needs to be drawn on the menu image so it will not look like this when done
-    #settings.outline_text_w_box(screen, "ASTROQUIZ", 100)
     
     # Creates menu buttons
     play_button_rect = settings.outline_text_w_box(screen, "Play Game", 250)

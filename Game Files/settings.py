@@ -23,17 +23,17 @@ def outline_text(screen, text, height) :
     screen.blit(text_outline, (WIDTH // 2 - text_outline.get_width() // 2, height + 1))
     screen.blit(rendered_text, (WIDTH // 2 - rendered_text.get_width() // 2, height))
 
-def outline_text_w_box(screen, text, height) :
+def outline_text_w_box(screen, text, height, width=0) :
     text_outline = FONT.render(text, True, OUTLINE_COLOR)
     rendered_text = FONT.render(text, True, WHITE)
 
-    screen.blit(text_outline, (WIDTH // 2 - text_outline.get_width() // 2 - 1, height))
-    screen.blit(text_outline, (WIDTH // 2 - text_outline.get_width() // 2 + 1, height))
-    screen.blit(text_outline, (WIDTH // 2 - text_outline.get_width() // 2, height - 1))
-    screen.blit(text_outline, (WIDTH // 2 - text_outline.get_width() // 2, height + 1))
-    screen.blit(rendered_text, (WIDTH // 2 - rendered_text.get_width() // 2, height))
+    screen.blit(text_outline, (WIDTH // 2 - text_outline.get_width() // 2 - 1 + width, height))
+    screen.blit(text_outline, (WIDTH // 2 - text_outline.get_width() // 2 + 1 + width, height))
+    screen.blit(text_outline, (WIDTH // 2 - text_outline.get_width() // 2 + width, height - 1))
+    screen.blit(text_outline, (WIDTH // 2 - text_outline.get_width() // 2 + width, height + 1))
+    screen.blit(rendered_text, (WIDTH // 2 - rendered_text.get_width() // 2 + width, height))
 
-    button_rect = pygame.Rect(WIDTH // 2 - rendered_text.get_width() // 2 - 10, height - 7, rendered_text.get_width() + 20, 40)
+    button_rect = pygame.Rect(WIDTH // 2 - rendered_text.get_width() // 2 - 10 + width, height - 7, rendered_text.get_width() + 20, 40)
     pygame.draw.rect(screen, (255, 255, 255, 0), button_rect, 1)
 
     return button_rect
