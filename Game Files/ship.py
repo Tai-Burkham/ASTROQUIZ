@@ -70,3 +70,11 @@ class Ship(pygame.sprite.Sprite):
             self.rect.top = HEIGHT - 25  # Move ship to the bottom edge
         elif self.rect.top > HEIGHT - 10:  # Ship has moved off the bottom edge
             self.rect.bottom = 25  # Move ship to the top edge
+
+    def respawn_ship(ship):
+        """Respawn the ship in the center of the game map."""
+        ship.rect.centerx = WIDTH // 2
+        ship.rect.centery = HEIGHT // 2
+        # Stop player's momentum
+        ship.x_speed = 0
+        ship.y_speed = 0

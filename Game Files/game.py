@@ -44,14 +44,6 @@ invulnerability_start_time = 0
 blink_last_toggle_time = 0
 
 
-def respawn_ship(ship):
-    """Respawn the ship in the center of the game map."""
-    ship.rect.centerx = WIDTH // 2
-    ship.rect.centery = HEIGHT // 2
-     # Stop player's momentum
-    ship.x_speed = 0
-    ship.y_speed = 0
-
 def handle_collisions(player, asteroids):
     """Handle collisions between the player and asteroids."""
     global is_invulnerable, invulnerability_start_time, ship_lives
@@ -63,7 +55,7 @@ def handle_collisions(player, asteroids):
     if collisions:
         print("Collision detected!")
         if not is_invulnerable:
-            respawn_ship(ship)
+            Ship.respawn_ship(ship)
             is_invulnerable = True
             invulnerability_start_time = time.time()
             is_blinking = True
