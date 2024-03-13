@@ -25,10 +25,10 @@ ship_group.add(ship)
 
 # generate asteroids
 asteroid_group = pygame.sprite.Group()
-num_asteroids = 10
-for _ in range(num_asteroids):
-    asteroid = Asteroid()
-    asteroid_group.add(asteroid)
+def generate_asteroids(num_asteroids = 10):
+    for _ in range(num_asteroids):
+        asteroid = Asteroid()
+        asteroid_group.add(asteroid)
 
 # Global variables to track player's invulnerability and respawn blinking
 is_invulnerable = False
@@ -69,6 +69,13 @@ def update_invulnerability():
             blink_last_toggle_time = current_time
 
 def game_over_screen(screen):
+    # Clear the asteroid group
+    asteroid_group.empty()
+
+    # Reposition the ship in the middle of the screen
+    ship.rect.centerx = WIDTH // 2
+    ship.rect.centery = HEIGHT // 2
+
     # Create clickable boxes
     button_width = 180
     button_height = 50  # Adjusted height for smaller buttons
@@ -119,6 +126,7 @@ def game(screen):
     
     # Initialize player lives, adjust as needed for debugging
     ship_lives = 1
+    generate_asteroids()
 
     # Initial movement variables
     forward = False
