@@ -16,7 +16,7 @@ pygame.display.set_caption("ASTROQUIZ")
 # pygame.display.set_icon(icon_image)
 
 # loads background image
-background_image = pygame.image.load("Images and designs/menubackground title.jpg")
+background_image = pygame.image.load("Game Files/assets/images/menubackground_title.jpg")
 background_image = pygame.transform.scale(background_image, (s.WIDTH, s.HEIGHT))
 
 # Displays the menu items and returns the clickable boxes
