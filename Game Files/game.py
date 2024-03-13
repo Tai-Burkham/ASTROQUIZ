@@ -1,5 +1,6 @@
 import pygame
 from ship import Ship
+from ship import Missile
 from asteroid import Asteroid
 from pygame.locals import *
 from settings import WIDTH, HEIGHT, FONT
@@ -22,6 +23,8 @@ background_image = pygame.transform.scale(background_image, (WIDTH, HEIGHT))
 ship = Ship()
 ship_group = pygame.sprite.Group()
 ship_group.add(ship)
+
+missile = Missile((ship.rect.centerx, ship.rect.centery), ship.angle)
 
 # generate asteroids
 asteroid_group = pygame.sprite.Group()
@@ -133,11 +136,13 @@ def game(screen):
     reverse = False  
     left_turn = False
     right_turn = False
+    space_pressed = False
 
     clock = pygame.time.Clock()
     
     # Game loop
     while True:
+        ship = Ship()  # Create an instance of the Ship class
         while not game_over:
             # Handles events, This is where all mouse and keyboard inputs will be
             for event in pygame.event.get():
@@ -154,6 +159,10 @@ def game(screen):
                         left_turn = True
                     if event.key == pygame.K_d or event.key == pygame.K_RIGHT:
                         right_turn = True
+                    if event.key == pygame.K_SPACE:
+                        space_pressed = True
+                        
+                    
                     # Need to impliment:
                     # shooting
                     # Mouse and/or keyboard input for questions
@@ -174,6 +183,11 @@ def game(screen):
 
             # Ship Movement 
             ship.update(forward, reverse, left_turn, right_turn) 
+
+            
+         
+            #ship.shoot_missile()  # Call the shoot_missile() method
+            #ship.shoot_missile( missile)
 
                 # Handle collisions
             handle_collisions(ship, asteroid_group)
