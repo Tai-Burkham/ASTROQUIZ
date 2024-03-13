@@ -2,6 +2,7 @@ import pygame
 from ship import Ship
 from ship import Laser
 from asteroid import Asteroid
+from Explosion import *
 from pygame.locals import *
 from settings import WIDTH, HEIGHT, FONT
 import time
@@ -142,6 +143,7 @@ def game(screen):
     while True:
         firing = False
         laser_group = pygame.sprite.Group()
+        explosion_group = pygame.sprite.Group()
         while not game_over:
             # Handles events, This is where all mouse and keyboard inputs will be
             for event in pygame.event.get():
@@ -199,9 +201,20 @@ def game(screen):
             # Fill the screen with a color or image
             screen.blit(background_image, (0, 0))
 
-
+            #drawing all the assest
             asteroid_group.draw(screen)
             laser_group.draw(screen) 
+            explosion_group.update()
+            explosion_group.draw(screen)
+
+
+            for laser in laser_group:    # If a laser hits an asteroid, create an explosion and remove the asteroid
+                if pygame.sprite.spritecollide(laser, asteroid_group, True):
+                    explosion = Explosion(asteroid.rect.center)
+                    explosion_group.add(explosion)
+                    laser_group.remove(laser)
+
+            laser_group = pygame.sprite.Group([laser for laser in laser_group if laser.lifetime > 0])
 
             # Draw player only if not invulnerable or blinking
             if not is_invulnerable or (is_invulnerable and is_blinking):
