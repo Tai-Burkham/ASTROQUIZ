@@ -6,8 +6,8 @@ import settings as s
 score = 0
 asteroids_destroyed = 0
 
-background_image = pygame.image.load("Game Files/assets/images/menubackground.jpg")
-background_image = pygame.transform.scale(background_image, (s.WIDTH, s.HEIGHT))
+#background_image = pygame.image.load("Game Files/assets/images/menubackground.jpg")
+#background_image = pygame.transform.scale(background_image, (s.WIDTH, s.HEIGHT))
 
 
 # Font initialization
@@ -26,15 +26,15 @@ def view_High_Scores(screen) :
                 if event.key == pygame.K_x:  # Add functionality to go back
                     return
 
-        screen.fill(s.WHITE)
-        screen.blit(background_image, (0, 0))
+       # screen.fill(s.WHITE)
+       # screen.blit(background_image, (0, 0))
  
  # Display current score and asteroids destroyed
         score_text = font.render(f"Score: {score}", True, (255, 0, 0))
         screen.blit(score_text, (s.WIDTH - score_text.get_width() - 10, 10))  # Position score text at top right
 
 
-        pygame.display.flip()
+       # pygame.display.flip()
 
 
 # Function to handle asteroid destruction and score update

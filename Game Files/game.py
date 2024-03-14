@@ -3,6 +3,8 @@ from ship import Ship
 from ship import Laser
 from asteroid import Asteroid
 from Explosion import *
+import high_scores
+from high_scores import *
 from pygame.locals import *
 from settings import WIDTH, HEIGHT, FONT
 import time
@@ -24,6 +26,9 @@ background_image = pygame.transform.scale(background_image, (WIDTH, HEIGHT))
 ship = Ship()
 ship_group = pygame.sprite.Group()
 ship_group.add(ship)
+
+
+
 
 
 # generate asteroids
@@ -109,9 +114,9 @@ def game_over_screen(screen):
     score = 100
 
     # Render Score
-    score_text = FONT.render("Score: %s" %score, True, WHITE)
-    score_text_rect = game_over_text.get_rect(center=(game_over_box.centerx, game_over_box.top + 60))
-    screen.blit(score_text, score_text_rect)
+   # score_text = FONT.render("Score: %s" %score, True, WHITE)
+   # score_text_rect = game_over_text.get_rect(center=(game_over_box.centerx, game_over_box.top + 60))
+   # screen.blit(score_text, score_text_rect)
 
     # Render buttons
     play_again_button_rect = s.outline_text_w_box(screen, "Play Again", 325, -80)
@@ -138,6 +143,9 @@ def game(screen):
     right_turn = False
 
     clock = pygame.time.Clock()
+
+    # Font initialization
+   # font = pygame.font.Font(None, 36)  # You can adjust the font size as needed
     
     # Game loop
     while True:
@@ -200,6 +208,7 @@ def game(screen):
             # Draw everything
             # Fill the screen with a color or image
             screen.blit(background_image, (0, 0))
+            
 
             #drawing all the assest
             asteroid_group.draw(screen)
@@ -213,12 +222,16 @@ def game(screen):
                     explosion = Explosion(asteroid.rect.center)
                     explosion_group.add(explosion)
                     laser_group.remove(laser)
+                   
 
             laser_group = pygame.sprite.Group([laser for laser in laser_group if laser.lifetime > 0])
 
             # Draw player only if not invulnerable or blinking
             if not is_invulnerable or (is_invulnerable and is_blinking):
                 ship_group.draw(screen)
+
+           # view_High_Scores(screen)
+           # destroy_asteroid()
 
             pygame.display.flip()
 
