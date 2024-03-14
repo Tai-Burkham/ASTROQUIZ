@@ -78,3 +78,24 @@ class Ship(pygame.sprite.Sprite):
         # Stop player's momentum
         ship.x_speed = 0
         ship.y_speed = 0
+
+
+class Laser(pygame.sprite.Sprite):
+    def __init__(self, start_pos, angle):
+        super().__init__()
+        self.image = pygame.Surface((5, 15))
+        self.image.fill((255, 0, 0))  # Red color for laser
+        self.rect = self.image.get_rect()
+        self.rect.center = start_pos
+        self.angle = angle
+        self.speed = 10
+        self.lifetime = 30  # Frames the laser is visible
+
+    def update(self):
+        # Move the laser in the direction of its angle
+        self.rect.x += self.speed * math.cos(math.radians(self.angle))
+        self.rect.y += self.speed * math.sin(math.radians(self.angle))
+        self.lifetime -= 1
+
+    def draw(self, screen):
+        screen.blit(self.image, self.rect)        
