@@ -163,8 +163,8 @@ def game(screen):
                     if event.key == pygame.K_SPACE:
                          firing = True     # Fire laser when spacebar is pressed
                     # Need to impliment:
-                    # shooting
-                    # Mouse and/or keyboard input for questions
+                    # shooting - completed 
+                    # Mouse and/or keyboard input for questions 
                     # Pause
 
                 elif event.type == pygame.KEYUP:
