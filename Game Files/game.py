@@ -213,6 +213,7 @@ def game(screen):
                     explosion = Explosion(asteroid.rect.center)
                     explosion_group.add(explosion)
                     laser_group.remove(laser)
+                    generate_asteroids(1)
 
             laser_group = pygame.sprite.Group([laser for laser in laser_group if laser.lifetime > 0])
 
