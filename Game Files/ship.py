@@ -81,15 +81,17 @@ class Ship(pygame.sprite.Sprite):
 
 
 class Laser(pygame.sprite.Sprite):
-    def __init__(self, start_pos, angle):
+    def __init__(self, start_pos, ship_angle):
         super().__init__()
-        self.image = pygame.Surface((5, 15))
-        self.image.fill((255, 0, 0))  # Red color for laser
+        self.original_image = pygame.Surface((2, 2))  # Create a rectangular surface
+        self.original_image.fill((255, 0, 0))  # Red color for laser
+        self.image = pygame.transform.rotate(self.original_image, ship_angle)  # Rotate the image
         self.rect = self.image.get_rect()
         self.rect.center = start_pos
-        self.angle = angle
+
+        self.angle = ship_angle
         self.speed = 10
-        self.lifetime = 30  # Frames the laser is visible
+        self.lifetime = 60  # Frames the laser is visible
 
     def update(self):
         # Move the laser in the direction of its angle
