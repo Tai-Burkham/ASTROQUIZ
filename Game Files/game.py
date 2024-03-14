@@ -39,6 +39,7 @@ is_blinking = False
 invulnerability_start_time = 0
 blink_last_toggle_time = 0
 
+
 # Handles collisions between player and asteroids.
 def handle_collisions(player, asteroids):
     global is_invulnerable, invulnerability_start_time, ship_lives, game_over
@@ -129,6 +130,8 @@ def game(screen):
     
     # Initialize player lives, adjust as needed for debugging
     ship_lives = 1
+    laser_cooldown = 0
+    laser_count = 0
     generate_asteroids()
 
     # Initial movement variables
@@ -187,14 +190,23 @@ def game(screen):
             #shoot the lazer
             laser_group.update()
 
-            if firing:
-             laser = Laser(ship.rect.center, ship.angle)
-             laser_group.add(laser)
-                # Handle collisions
+            if firing and laser_cooldown <= 0:
+                # Fire a burst of lasers
+                laser = Laser(ship.rect.center, ship.angle)
+                laser_group.add(laser)
+                laser_count += 1
+                if laser_count >= 10:
+                    laser_cooldown = 15 # Adjust this for cooldown time 30 is 1 second
+                    laser_count = 0
+
+            # Update the laser cooldown
+            if laser_cooldown > 0:
+                laser_cooldown -= 1    
+
+            # Handle collisions
             handle_collisions(ship, asteroid_group)
 
-
-                # Update player's invulnerability status
+            # Update player's invulnerability status
             update_invulnerability()
 
             # Draw everything
