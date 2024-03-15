@@ -3,7 +3,7 @@ import pygame
 class Explosion(pygame.sprite.Sprite):
     def __init__(self, center):
         super().__init__()
-        self.sprite_sheet = pygame.image.load("Game Files/assets/images/NEWexplosionforgame.png").convert_alpha()
+        self.sprite_sheet = pygame.image.load("Game Files/assets/images/explosion2.png").convert_alpha()
         self.rect = self.sprite_sheet.get_rect()
         self.rect.center = center
         self.frame_width = self.rect.width // 8
