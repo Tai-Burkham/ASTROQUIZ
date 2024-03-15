@@ -1,7 +1,7 @@
 import pygame
 
 class Explosion(pygame.sprite.Sprite):
-    def __init__(self, position, duration=1):
+    def __init__(self, position, duration=0.25):
         super().__init__()
         self.images = []  # List to hold the explosion animation frames
         self.index = 0    # Current index of the image being displayed

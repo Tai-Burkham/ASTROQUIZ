@@ -188,17 +188,22 @@ def game(screen):
                         right_turn = False
                     if event.key == pygame.K_SPACE:
                         firing = False
-            # astroid movement goes here
+
+            # Movement updates
+            # Asteroid Movement
             for asteroid in asteroid_group:
                 if isinstance(asteroid, Asteroid):
                     asteroid.update()
 
             # Ship Movement 
             ship.update(forward, reverse, left_turn, right_turn) 
-             
-            #shoot the lazer
-            laser_group.update()
+            # Laser Movement
+            laser_group.update() 
 
+            explosion_group.update()
+
+            # Interactions
+            # Laser Shooting
             if firing and laser_cooldown <= 0:
                 # Fire a burst of lasers
                 laser = Laser(ship.rect.center, ship.angle)
@@ -207,29 +212,17 @@ def game(screen):
                 if laser_count >= 10:
                     laser_cooldown = 15 # Adjust this for cooldown time 30 is 1 second
                     laser_count = 0
-
             # Update the laser cooldown
             if laser_cooldown > 0:
                 laser_cooldown -= 1    
 
-            # Handle collisions
+            # Handle collisions with ship and asteroid
             handle_collisions(ship, asteroid_group)
-
-            # Update player's invulnerability status
+            # Update player's invulnerability status after collision with asteroid
             update_invulnerability()
-
-            # Draw everything
-            # Fill the screen with a color or image
-            screen.blit(background_image, (0, 0))
-
-            #drawing all the assest
-            asteroid_group.draw(screen)
-            laser_group.draw(screen) 
-            explosion_group.update()
-            explosion_group.draw(screen)
-
-
-            for laser in laser_group:    # If a laser hits an asteroid, create an explosion and remove the asteroid
+            
+            # If a laser hits an asteroid, create an explosion and remove the asteroid
+            for laser in laser_group:    
                 # Check for collisions between the laser and asteroids
                 collisions = pygame.sprite.spritecollide(laser, asteroid_group, True)
                 if collisions:
@@ -238,9 +231,18 @@ def game(screen):
                         explosion = Explosion(asteroid.rect.center)
                         explosion_group.add(explosion) 
                     laser.kill()
+                    generate_asteroids(1)
                    
-
             laser_group = pygame.sprite.Group([laser for laser in laser_group if laser.lifetime > 0])
+
+            # Draw everything
+            # Add background image
+            screen.blit(background_image, (0, 0))
+
+            #drawing all the assest
+            asteroid_group.draw(screen)
+            laser_group.draw(screen) 
+            explosion_group.draw(screen)
 
             # Draw player only if not invulnerable or blinking
             if not is_invulnerable or (is_invulnerable and is_blinking):
