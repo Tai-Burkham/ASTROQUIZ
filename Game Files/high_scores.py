@@ -12,11 +12,16 @@ background_image = pygame.transform.scale(background_image, (s.WIDTH, s.HEIGHT))
 font = pygame.font.Font(None, 36)  # You can adjust the font size as needed
 def load_high_score():
     try:
+<<<<<<< HEAD
         with open("high_scores.txt", "r") as file:
          scores_str = file.read()  # Read the entire content of the file
          scores_list = scores_str.split('\n')  # Split the string into a list of scores
          scores_int = [int(score) for score in scores_list if score.strip()]  # Convert each score string to an integer
          return scores_int
+=======
+        with open("high_score.txt", "r") as file:
+            return int(file.read())
+>>>>>>> c5cdf190bfec260015b8ac5660d884dee35cb8fc
     except FileNotFoundError:
         return 0
 
