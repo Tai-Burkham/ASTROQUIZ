@@ -135,7 +135,7 @@ def game(screen):
     score = 0
  
     # Load highest score
-    highest_score = high_scores.load_high_score(screen) 
+    highest_score = high_scores.load_high_score() 
 
 
     game_over = False
