@@ -54,3 +54,8 @@ def edit_settings(screen) :
         outline_text(screen, "Hit X to go back.", 350)
 
         pygame.display.flip()
+
+
+        #difficulty 
+        #turn off questions 
+        #resize the game page
