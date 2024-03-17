@@ -130,7 +130,14 @@ def game_over_screen(screen):
 
 # Main game method
 def game(screen):
-    global game_over, ship_lives
+    global game_over, ship_lives, score
+    
+    # Initialize score variable
+    score = 0
+ 
+    # Load highest score
+    highest_score = high_scores.load_high_score() 
+
 
     game_over = False
     
@@ -231,6 +238,8 @@ def game(screen):
                         # Create an explosion at the asteroid's position
                         explosion = Explosion(asteroid.rect.center)
                         explosion_group.add(explosion) 
+                          # Increment score
+                    score += 100
                     laser.kill()
                     generate_asteroids(1)
                    
@@ -248,9 +257,16 @@ def game(screen):
             # Draw player only if not invulnerable or blinking
             if not is_invulnerable or (is_invulnerable and is_blinking):
                 ship_group.draw(screen)
-
-           # view_High_Scores(screen)
-           # destroy_asteroid()
+            
+             # Update the highest score if the current score is higher
+            if score > highest_score:
+               highest_score = score
+               high_scores.save_high_score(highest_score)
+            
+            #render the cureent score at the top of the screen 
+            score_text = font.render(f"Score: {score}", True, (255, 0, 0))
+            screen.blit(score_text, (10, 10))  # Position score text at top left corner
+           
 
             pygame.display.flip()
 
@@ -259,7 +275,7 @@ def game(screen):
             # angle_text = font.render(f"Angle: {ship.angle}", True, WHITE)
             # coord_text = font.render(f"Coords: ({ship.rect.centerx}, {ship.rect.centery})", True, WHITE)
 
-
+           
 
             # # Blit text onto the screen
             # screen.blit(speed_text, (10, 10))  # Adjust the position as needed

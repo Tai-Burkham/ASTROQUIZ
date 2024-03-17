@@ -65,7 +65,7 @@ def main():
                 if play_button_rect.collidepoint(event.pos):
                     game.game(screen)
                 elif high_scores_button_rect.collidepoint(event.pos):
-                    high_scores.view_High_Scores(screen)
+                    high_scores.view_high_score(screen)
                 elif edit_questions_button_rect.collidepoint(event.pos):
                     edit_questions.edit_questions(screen)
                 elif edit_settings_button_rect.collidepoint(event.pos):
