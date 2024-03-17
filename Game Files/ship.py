@@ -23,13 +23,13 @@ class Ship(pygame.sprite.Sprite):
         self.mask = pygame.mask.from_surface(self.image)
 
     def update(self, forward, reverse, left_turn, right_turn):
-        # Rotate the ship
+        # Rotate the ship, adjust self.angle for turning speed
         if left_turn:
-            self.angle -= 2
+            self.angle -= 5
             if self.angle < 0:
                 self.angle += 360
         if right_turn:
-            self.angle += 2
+            self.angle += 5
             if self.angle > 360:
                 self.angle -= 360
 

@@ -9,6 +9,7 @@ from pygame.locals import *
 from settings import WIDTH, HEIGHT, FONT
 import time
 import settings as s
+import math
 
 
 # Constants
