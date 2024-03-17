@@ -48,6 +48,7 @@ def save_high_score(score):
 def view_high_score(screen):
     running = True
     while running:
+        count =1
         # Handles events, This is where all mouse and keyboard inputs will be
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
@@ -63,9 +64,11 @@ def view_high_score(screen):
                 if high_scores:
                     y_offset = 100  # Initial Y offset for displaying scores
                     for score in high_scores:
-                        score_text = f"High Score: {score.strip()}"
+                        
+                        score_text = f"High Score {count}: {score.strip()}"
                         s.outline_text(screen, score_text, (36 + y_offset))
                         y_offset += 50  # Increment Y offset for next score
+                        count += 1
                 else:
                     s.outline_text(screen, "No high scores recorded", 36 )
         except FileNotFoundError:
