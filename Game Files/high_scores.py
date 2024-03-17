@@ -46,8 +46,8 @@ def save_high_score(score):
 
 
 def view_high_score(screen):
-     running = True
-     while running:
+    running = True
+    while running:
         # Handles events, This is where all mouse and keyboard inputs will be
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
@@ -55,12 +55,21 @@ def view_high_score(screen):
         
         screen.fill(s.WHITE)
         screen.blit(background_image, (0, 0))
+        
         try:
             with open("high_score.txt", "r") as file:
-                high_score_content = file.read()
-                s.outline_text(screen, high_score_content, 300)
+                high_scores = file.readlines()  # Read high scores line by line
+                
+                if high_scores:
+                    y_offset = 100  # Initial Y offset for displaying scores
+                    for score in high_scores:
+                        score_text = f"High Score: {score.strip()}"
+                        s.outline_text(screen, score_text, (36 + y_offset))
+                        y_offset += 50  # Increment Y offset for next score
+                else:
+                    s.outline_text(screen, "No high scores recorded", 36 )
         except FileNotFoundError:
-            s.outline_text(screen, "No high score recorded", 300)
+            s.outline_text(screen, "No high scores recorded", 36)
 
         pygame.display.flip()
     # Example usage of destroy_asteroid function
