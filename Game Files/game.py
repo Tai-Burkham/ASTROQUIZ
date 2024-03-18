@@ -112,13 +112,10 @@ def game_over_screen(screen):
     game_over_text_rect = game_over_text.get_rect(center=(game_over_box.centerx - 3, game_over_box.top + 25))
     screen.blit(game_over_text, game_over_text_rect)
 
-    # Temp score
-    score = 100
-
     # Render Score
-   # score_text = FONT.render("Score: %s" %score, True, WHITE)
-   # score_text_rect = game_over_text.get_rect(center=(game_over_box.centerx, game_over_box.top + 60))
-   # screen.blit(score_text, score_text_rect)
+    score_text = FONT.render("Score: %s" %score, True, WHITE)
+    score_text_rect = game_over_text.get_rect(center=(game_over_box.centerx, game_over_box.top + 60))
+    screen.blit(score_text, score_text_rect)
 
     # Render buttons
     play_again_button_rect = s.outline_text_w_box(screen, "Play Again", 325, -80)
