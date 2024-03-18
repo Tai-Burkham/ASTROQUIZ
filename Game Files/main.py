@@ -12,8 +12,8 @@ screen = pygame.display.set_mode((s.WIDTH, s.HEIGHT))
 pygame.display.set_caption("ASTROQUIZ")
 
 # for the top left icon. Still need an icon image before implimenting
-# icon_image = pygame.image.load("icon.png")
-# pygame.display.set_icon(icon_image)
+icon_image = pygame.image.load("Game Files/assets/images/Asteroid_3.png")
+pygame.display.set_icon(icon_image)
 
 # loads background image
 background_image = pygame.image.load("Game Files/assets/images/menubackground_title.jpg")
