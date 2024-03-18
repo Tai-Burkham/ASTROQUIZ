@@ -1,5 +1,6 @@
 import pygame
 import settings as s
+import utilities as u
 
 def game_over_screen(screen, score):
     # Clear the asteroid group
@@ -37,8 +38,8 @@ def game_over_screen(screen, score):
     screen.blit(score_text, score_text_rect)
 
     # Render buttons
-    play_again_button_rect = s.outline_text_w_box(screen, "Play Again", 325, -80)
-    main_menu_button_rect = s.outline_text_w_box(screen, "Main Menu", 325, 80)
+    play_again_button_rect = u.outline_text_w_box(screen, "Play Again", 325, -80)
+    main_menu_button_rect = u.outline_text_w_box(screen, "Main Menu", 325, 80)
 
     pygame.display.flip()
 

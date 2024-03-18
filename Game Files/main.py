@@ -4,6 +4,7 @@ import edit_questions
 import settings
 import high_scores
 import settings as s
+import utilities as u
 
 pygame.init()
 
@@ -26,11 +27,11 @@ def main_menu():
     screen.blit(background_image, (0, 0))
     
     # Creates menu buttons
-    play_button_rect = settings.outline_text_w_box(screen, "Play Game", 250)
-    high_scores_button_rect = settings.outline_text_w_box(screen, "High Scores", 300)
-    edit_questions_button_rect = settings.outline_text_w_box(screen, "Edit Questions", 350)    
-    edit_settings_button_rect = settings.outline_text_w_box(screen, "Edit Settings", 400)
-    quit_button_rect = settings.outline_text_w_box(screen, "Quit", 450) 
+    play_button_rect = u.outline_text_w_box(screen, "Play Game", 250)
+    high_scores_button_rect = u.outline_text_w_box(screen, "High Scores", 300)
+    edit_questions_button_rect = u.outline_text_w_box(screen, "Edit Questions", 350)    
+    edit_settings_button_rect = u.outline_text_w_box(screen, "Edit Settings", 400)
+    quit_button_rect = u.outline_text_w_box(screen, "Quit", 450) 
 
     pygame.display.flip()
 

@@ -1,5 +1,6 @@
 import pygame
 import settings as s
+import utilities as u
 # from settings import WIDTH, HEIGHT, WHITE, BLACK, FONT
 
 
@@ -17,7 +18,7 @@ def edit_questions(screen) :
         screen.fill(s.WHITE)
         screen.blit(background_image, (0, 0))
 
-        s.outline_text(screen, "This is where you can edit questions. Hit X to go back.", 300)
+        u.outline_text(screen, "This is where you can edit questions. Hit X to go back.", 300)
         # text = FONT.render("This is where you can edit questions. Hit X to go back.", True, (255, 255, 255))
         # screen.blit(text, (WIDTH // 2 - text.get_width() // 2 - 1, 300))
 
