@@ -79,6 +79,8 @@ class Ship(pygame.sprite.Sprite):
         ship.x_speed = 0
         ship.y_speed = 0
 
+    
+
 
 class Laser(pygame.sprite.Sprite):
     def __init__(self, start_pos, ship_angle):

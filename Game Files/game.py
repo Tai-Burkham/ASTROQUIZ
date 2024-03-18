@@ -9,8 +9,7 @@ from pygame.locals import *
 from settings import WIDTH, HEIGHT, FONT
 import time
 import settings as s
-import math
-
+import game_over_screen
 
 # Constants
 BLACK = (0, 0, 0)
@@ -28,10 +27,6 @@ ship = Ship()
 ship_group = pygame.sprite.Group()
 ship_group.add(ship)
 
-
-
-
-
 # generate asteroids
 asteroid_group = pygame.sprite.Group()
 def generate_asteroids(num_asteroids = 10):
@@ -44,7 +39,6 @@ is_invulnerable = False
 is_blinking = False
 invulnerability_start_time = 0
 blink_last_toggle_time = 0
-
 
 # Handles collisions between player and asteroids.
 def handle_collisions(player, asteroids):
@@ -78,56 +72,6 @@ def update_invulnerability():
             is_blinking = not is_blinking
             blink_last_toggle_time = current_time
 
-def game_over_screen(screen):
-    # Clear the asteroid group
-    asteroid_group.empty()
-
-    # Reposition the ship in the middle of the screen
-    ship.rect.centerx = WIDTH // 2
-    ship.rect.centery = HEIGHT // 2
-
-    # Create clickable boxes
-    button_width = 180
-    button_height = 50  # Adjusted height for smaller buttons
-    button_spacing = 20
-
-    # Define the dimensions of the black box
-    box_width = 2 * button_width + button_spacing
-    box_height = 3 * button_height  # Adjusted height for two buttons
-    game_over_box = pygame.Rect((screen.get_width() - box_width) // 2, (screen.get_height() - box_height) // 2, box_width, box_height)
-
-    # Draw white border
-    border_thickness = 2
-    border_rect = pygame.Rect(game_over_box.left - border_thickness, 
-                               game_over_box.top - border_thickness, 
-                               game_over_box.width + 2 * border_thickness, 
-                               game_over_box.height + 2 * border_thickness)
-    pygame.draw.rect(screen, WHITE, border_rect)
-
-    # Draw black box
-    pygame.draw.rect(screen, BLACK, game_over_box)
-
-    # Render and center the "Game Over" text
-    game_over_text = FONT.render("Game Over", True, WHITE)
-    game_over_text_rect = game_over_text.get_rect(center=(game_over_box.centerx - 3, game_over_box.top + 25))
-    screen.blit(game_over_text, game_over_text_rect)
-
-    # Temp score
-    score = 100
-
-    # Render Score
-   # score_text = FONT.render("Score: %s" %score, True, WHITE)
-   # score_text_rect = game_over_text.get_rect(center=(game_over_box.centerx, game_over_box.top + 60))
-   # screen.blit(score_text, score_text_rect)
-
-    # Render buttons
-    play_again_button_rect = s.outline_text_w_box(screen, "Play Again", 325, -80)
-    main_menu_button_rect = s.outline_text_w_box(screen, "Main Menu", 325, 80)
-
-    pygame.display.flip()
-
-    return play_again_button_rect, main_menu_button_rect
-
 # Main game method
 def game(screen):
     global game_over, ship_lives, score
@@ -137,7 +81,6 @@ def game(screen):
  
     # Load highest score
     highest_score = high_scores.load_high_score() 
-
 
     game_over = False
     
@@ -183,7 +126,6 @@ def game(screen):
                     if event.key == pygame.K_SPACE:
                          firing = True     # Fire laser when spacebar is pressed
                     # Need to impliment:
-                    # shooting - completed 
                     # Mouse and/or keyboard input for questions 
                     # Pause
 
@@ -267,15 +209,12 @@ def game(screen):
             score_text = font.render(f"Score: {score}", True, (255, 0, 0))
             screen.blit(score_text, (10, 10))  # Position score text at top left corner
            
-
             pygame.display.flip()
 
             # Render text surfaces for debugging
             # speed_text = font.render(f"Speed: ({ship.x_speed:.2f}, {ship.y_speed:.2f})", True, WHITE)
             # angle_text = font.render(f"Angle: {ship.angle}", True, WHITE)
             # coord_text = font.render(f"Coords: ({ship.rect.centerx}, {ship.rect.centery})", True, WHITE)
-
-           
 
             # # Blit text onto the screen
             # screen.blit(speed_text, (10, 10))  # Adjust the position as needed
@@ -289,8 +228,13 @@ def game(screen):
             # This controls game speed
             clock.tick(30)
 
+        asteroid_group.empty()
+
+        # Reposition the ship in the middle of the screen
+        ship.rect.centerx = WIDTH // 2
+        ship.rect.centery = HEIGHT // 2
         # Put up game over screen and initialize buttons
-        play_again_button_rect, main_menu_button_rect = game_over_screen(screen)
+        play_again_button_rect, main_menu_button_rect = game_over_screen.game_over_screen(screen, score)
 
         # Event handling for game over screen
         for event in pygame.event.get():
