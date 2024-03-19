@@ -6,6 +6,7 @@ Github for Astroquiz
 ### Main
 - Before game starts there should be instructions on controls, we can either have this pop up after play is pushed or have it on the side of the main screen or any other ideas.
 
+ahmed/ calvin:
 ### Game:
 - add health status
 - change score text color to outline text
@@ -26,13 +27,13 @@ Github for Astroquiz
 - add way to reset scores
 - how many scores should it keep?
 
-### Settings:
+Tailor: ### Settings:
 - add way to resize window (late implementaiton, will require changing sizes in entire code)
 - need settings for increased difficulty (easy, medium, hard) this will increase asteroid amount and speed, will need to pull this setting from the settings file
 - in settings we should be able to change our ship, we will need to find other ship styles
 - will need a way to turn questions off completely in here
 
-### Edit Quesitons:
+Michelle: ### Edit Quesitons:
 - need to set up the interface for adding questions.
 - will need the type of question (multiple choice, true false) option
 - will need input fields for the question and the choices
