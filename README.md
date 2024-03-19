@@ -14,6 +14,8 @@ ahmed/ calvin:
 - add questions interaction
 - add powerups
 - need to add sounds for shooting, destruction, points, music
+- add supply crates for questions
+- quesitons pop with timer 
 
 ### Game Over:
 - add way to input player name
