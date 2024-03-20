@@ -1,14 +1,16 @@
 import pygame
-from ship import Ship
-from ship import Laser
-from asteroid import Asteroid
-from Explosion import *
-import high_scores
-from high_scores import *
-from pygame.locals import *
 import time
+
 import settings as s
 import game_over_screen
+import high_scores
+from ship import *
+from asteroid import Asteroid
+from Explosion import *
+from high_scores import *
+from pygame.locals import *
+
+
 
 # Constants
 BLACK = (0, 0, 0)
