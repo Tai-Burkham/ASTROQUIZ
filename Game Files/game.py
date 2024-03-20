@@ -6,7 +6,6 @@ from Explosion import *
 import high_scores
 from high_scores import *
 from pygame.locals import *
-from settings import WIDTH, HEIGHT, FONT
 import time
 import settings as s
 import game_over_screen
@@ -21,7 +20,7 @@ INVULNERABILITY_DURATION = 3  # in seconds
 BLINK_INTERVAL = 0.2  # in seconds
 
 background_image = pygame.image.load("Images and designs/BG.jpg")
-background_image = pygame.transform.scale(background_image, (WIDTH, HEIGHT))
+background_image = pygame.transform.scale(background_image, (s.WIDTH, s.HEIGHT))
 
 ship = Ship()
 ship_group = pygame.sprite.Group()
@@ -231,8 +230,8 @@ def game(screen):
         asteroid_group.empty()
 
         # Reposition the ship in the middle of the screen
-        ship.rect.centerx = WIDTH // 2
-        ship.rect.centery = HEIGHT // 2
+        ship.rect.centerx = s.WIDTH // 2
+        ship.rect.centery = s.HEIGHT // 2
         # Put up game over screen and initialize buttons
         play_again_button_rect, main_menu_button_rect = game_over_screen.game_over_screen(screen, score)
 
