@@ -34,6 +34,7 @@ class Ship(pygame.sprite.Sprite):
         self.visible = True  # Add visible attribute
         
     def update(self, forward, reverse, left_turn, right_turn):
+        global is_blinking
         # Rotate the ship, adjust self.angle for turning speed
         if left_turn:
             self.angle -= 5
@@ -84,13 +85,10 @@ class Ship(pygame.sprite.Sprite):
 
         # Toggle visibility if blinking
         if is_blinking:
-            current_time = pygame.time.get_ticks()
-            if (current_time - blink_last_toggle_time) % (2 * BLINK_INTERVAL) >= BLINK_INTERVAL:
-                # Make the ship visible every BLINK_INTERVAL milliseconds
-                self.visible = True
-            else:
-                # Make the ship invisible
-                self.visible = False
+            self.visible = False
+        else:
+            self.visible = True
+
 
     def respawn_ship(ship):
         """Respawn the ship in the center of the game map."""

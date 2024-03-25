@@ -173,7 +173,7 @@ def game(screen):
                 explosion_group.draw(screen)
 
                 # Draw player only if not invulnerable or blinking
-                if not is_invulnerable or (is_invulnerable and is_blinking):
+                if ship.visible:
                     ship_group.draw(screen)
                 
                 # Update the highest score if the current score is higher
