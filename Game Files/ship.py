@@ -1,9 +1,19 @@
 import pygame
 import math
+import time
 from settings import WIDTH, HEIGHT
 
 ACCELERATION = 0.5
 MAX_SPEED = 5
+
+RESPAWN_DURATION = 1  # in seconds
+INVULNERABILITY_DURATION = 3000  # in miliseconds
+BLINK_INTERVAL = 200  # in miliseconds
+
+is_invulnerable = False
+is_blinking = False
+invulnerability_start_time = 0
+blink_last_toggle_time = 0
 
 ship_image = pygame.image.load("Game Files/assets/images/Spaceship_1.png")
 ship_image = pygame.transform.rotate(ship_image, -90)
@@ -21,7 +31,8 @@ class Ship(pygame.sprite.Sprite):
         self.acceleration_x = 0
         self.acceleration_y = 0
         self.mask = pygame.mask.from_surface(self.image)
-
+        self.visible = True  # Add visible attribute
+        
     def update(self, forward, reverse, left_turn, right_turn):
         # Rotate the ship, adjust self.angle for turning speed
         if left_turn:
@@ -71,6 +82,16 @@ class Ship(pygame.sprite.Sprite):
         elif self.rect.top > HEIGHT - 10:  # Ship has moved off the bottom edge
             self.rect.bottom = 25  # Move ship to the top edge
 
+        # Toggle visibility if blinking
+        if is_blinking:
+            current_time = pygame.time.get_ticks()
+            if (current_time - blink_last_toggle_time) % (2 * BLINK_INTERVAL) >= BLINK_INTERVAL:
+                # Make the ship visible every BLINK_INTERVAL milliseconds
+                self.visible = True
+            else:
+                # Make the ship invisible
+                self.visible = False
+
     def respawn_ship(ship):
         """Respawn the ship in the center of the game map."""
         ship.rect.centerx = WIDTH // 2
@@ -79,7 +100,37 @@ class Ship(pygame.sprite.Sprite):
         ship.x_speed = 0
         ship.y_speed = 0
 
-    
+    # Handles collisions between player and asteroids.
+    def handle_collisions(self, ship, asteroids):
+        global is_invulnerable, invulnerability_start_time
+        
+        collisions = []
+        if not is_invulnerable:
+            collisions = pygame.sprite.spritecollide(ship, asteroids, False, pygame.sprite.collide_mask)
+        
+        if collisions:
+            if not is_invulnerable:
+                Ship.respawn_ship(ship)
+                is_invulnerable = True
+                invulnerability_start_time = pygame.time.get_ticks()
+                # Reduce player's lives by 1
+                return True
+        return False     
+
+    # Handles ship invulnerability
+    def update_invulnerability(self):
+        global is_invulnerable, is_blinking, blink_last_toggle_time
+        
+        if is_invulnerable:
+            current_time = pygame.time.get_ticks()
+            if current_time - invulnerability_start_time >= INVULNERABILITY_DURATION:
+                # Invulnerability duration has passed
+                is_invulnerable = False
+                is_blinking = False
+            elif current_time - blink_last_toggle_time >= BLINK_INTERVAL:
+                # Toggle blinking
+                is_blinking = not is_blinking
+                blink_last_toggle_time = current_time
 
 
 class Laser(pygame.sprite.Sprite):

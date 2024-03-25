@@ -1,5 +1,4 @@
 import pygame
-import time
 
 import settings as s
 import game_over_screen
@@ -15,10 +14,6 @@ from pygame.locals import *
 BLACK = (0, 0, 0)
 WHITE = (255, 255, 255)
 RED = (255, 0, 0)
-# Define constants for player respawn and invulnerability
-RESPAWN_DURATION = 1  # in seconds
-INVULNERABILITY_DURATION = 3  # in seconds
-BLINK_INTERVAL = 0.2  # in seconds
 
 background_image = pygame.image.load("Images and designs/BG.jpg")
 background_image = pygame.transform.scale(background_image, (s.WIDTH, s.HEIGHT))
@@ -33,45 +28,6 @@ def generate_asteroids(num_asteroids = 10):
     for _ in range(num_asteroids):
         asteroid = Asteroid()
         asteroid_group.add(asteroid)
-
-# Global variables to track player's invulnerability and respawn blinking
-is_invulnerable = False
-is_blinking = False
-invulnerability_start_time = 0
-blink_last_toggle_time = 0
-
-
-# Handles collisions between player and asteroids.
-def handle_collisions(player, asteroids):
-    global is_invulnerable, invulnerability_start_time, ship_lives, game_over
-    
-    collisions = []
-    if not is_invulnerable:
-        collisions = pygame.sprite.spritecollide(player, asteroids, False, pygame.sprite.collide_mask)
-    
-    if collisions:
-        print("Collision detected! Lives:%s" %ship_lives)
-        if not is_invulnerable:
-            Ship.respawn_ship(ship)
-            is_invulnerable = True
-            invulnerability_start_time = time.time()
-            # Reduce player's lives by 1
-            ship_lives -= 1      
-
-# Handles ship invulnerability
-def update_invulnerability():
-    global is_invulnerable, is_blinking, blink_last_toggle_time
-    
-    if is_invulnerable:
-        current_time = time.time()
-        if current_time - invulnerability_start_time >= INVULNERABILITY_DURATION:
-            # Invulnerability duration has passed
-            is_invulnerable = False
-            is_blinking = False
-        elif current_time - blink_last_toggle_time >= BLINK_INTERVAL:
-            # Toggle blinking
-            is_blinking = not is_blinking
-            blink_last_toggle_time = current_time
 
 # Main game method
 def game(screen):
@@ -88,7 +44,7 @@ def game(screen):
     game_paused = False
     
     # Initialize player lives, adjust as needed for debugging
-    ship_lives = 1
+    ship_lives = 3
     laser_cooldown = 0
     laser_count = 0
     
@@ -103,9 +59,6 @@ def game(screen):
     right_turn = False
 
     clock = pygame.time.Clock()
-
-    # Font initialization
-    # font = pygame.font.Font(None, 36)  # You can adjust the font size as needed
     
     # Game loop
     while True:
@@ -174,9 +127,11 @@ def game(screen):
                     laser_cooldown -= 1    
 
                 # Handle collisions with ship and asteroid
-                handle_collisions(ship, asteroid_group)
-                # Update player's invulnerability status after collision with asteroid
-                update_invulnerability()
+                collision_occured = ship.handle_collisions(ship, asteroid_group)
+                if collision_occured:
+                    print("Collision detected! Lives:%s" %ship_lives)
+                    ship_lives -= 1
+                ship.update_invulnerability()
                 
                 # If a laser hits an asteroid, create an explosion and remove the asteroid
                 for laser in laser_group:    
