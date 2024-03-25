@@ -15,8 +15,10 @@ BLACK = (0, 0, 0)
 WHITE = (255, 255, 255)
 RED = (255, 0, 0)
 
-background_image = pygame.image.load("Images and designs/BG.jpg")
+background_image = pygame.image.load("Game Files/assets/images/BG.jpg")
 background_image = pygame.transform.scale(background_image, (s.WIDTH, s.HEIGHT))
+health_image = pygame.image.load("Game Files/assets/images/health_heart.png")
+health_image = pygame.transform.scale(health_image, (40, 40))
 
 ship = Ship()
 ship_group = pygame.sprite.Group()
@@ -35,6 +37,7 @@ def game(screen):
     
     # Initialize score variable
     score = 0
+    score_multiplier = 1
  
     # Load highest score
     highest_score = high_scores.load_high_score()
@@ -49,7 +52,9 @@ def game(screen):
     laser_count = 0
     
     asteroids_destroyed = 0
-    correct_answer = 0
+    correct_answer = False
+    num_correct = 0
+    num_questions = 0
     generate_asteroids()
 
     # Initial movement variables
@@ -118,6 +123,7 @@ def game(screen):
                     # Fire a burst of lasers
                     laser = Laser(ship.rect.center, ship.angle)
                     laser_group.add(laser)
+                    score -= 1
                     laser_count += 1
                     if laser_count >= 10:
                         laser_cooldown = 15 # Adjust this for cooldown time 30 is 1 second
@@ -143,21 +149,26 @@ def game(screen):
                             asteroids_destroyed += 1
                             
                             # Check for question call
-                            if asteroids_destroyed % 2 == 0:
-                                
+                            if asteroids_destroyed % 7 == 0: # change frequency of questions
+                                num_questions += 1
                                 correct_answer = display_question(screen, questions)
-                                #game_paused = True
 
+                                # if correct answer increase score, score multiplier, and if health is low add one
                                 if correct_answer == True:
                                     score += 1000
+                                    score_multiplier += 1
+                                    num_correct += 1
+                                    if ship_lives < 3:
+                                        ship_lives += 1
                                 else:
                                     score -= 1000
+                                    score_multiplier = 1
                             # Create an explosion at the asteroid's position
                             explosion = Explosion(asteroid.rect.center)
                             explosion_group.add(explosion) 
 
                             # Increment score
-                            score += 100
+                            score += (100 * score_multiplier)
                             laser.kill()
                             generate_asteroids(1)
                     
@@ -181,25 +192,20 @@ def game(screen):
                 # highest_score = score
                 # high_scores.save_high_score(highest_score)
                 
-                #render the cureent score at the top of the screen 
-                score_text = font.render(f"Score: {score}", True, (255, 0, 0))
+                # Render the cureent score
+                score_text = font.render(f"Score: {score} x {score_multiplier}", True, (255, 0, 0))
                 screen.blit(score_text, (10, 10))  # Position score text at top left corner
 
+                # Render health hearts
+                x_offset = 0
+                for i in range(ship_lives):
+                    screen.blit(health_image, (10 + x_offset, 30))
+                    x_offset += 40
                 # If our of lives end game
                 if ship_lives <= 0:
                     game_over = True
 
                 pygame.display.flip()
-
-                # Render text surfaces for debugging
-                # speed_text = font.render(f"Speed: ({ship.x_speed:.2f}, {ship.y_speed:.2f})", True, WHITE)
-                # angle_text = font.render(f"Angle: {ship.angle}", True, WHITE)
-                # coord_text = font.render(f"Coords: ({ship.rect.centerx}, {ship.rect.centery})", True, WHITE)
-
-                # # Blit text onto the screen
-                # screen.blit(speed_text, (10, 10))  # Adjust the position as needed
-                # screen.blit(angle_text, (10, 30))
-                # screen.blit(coord_text, (10, 50))
 
                 # This controls game speed
                 clock.tick(30)
