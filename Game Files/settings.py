@@ -14,6 +14,8 @@ TEXT_COLOR = (255, 255, 255)
 background_image = pygame.image.load("Game Files/assets/images/menubackground.jpg")
 background_image = pygame.transform.scale(background_image, (WIDTH, HEIGHT))
 
+question_series = "ACM Ethics"
+
 def edit_settings(screen) :
     running = True
     while running:
@@ -25,9 +27,9 @@ def edit_settings(screen) :
         screen.fill(WHITE)
         screen.blit(background_image, (0, 0))
 
-        u.outline_text(screen, "This is where you can edit settings and settings are saved here.", 300)
+        u.outline_text(screen, "This is where you can edit settings and settings are saved here.", 300, FONT)
 
-        u.outline_text(screen, "Hit X to go back.", 350)
+        u.outline_text(screen, "Hit X to go back.", 350, FONT)
 
         pygame.display.flip()
 

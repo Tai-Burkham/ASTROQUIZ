@@ -67,13 +67,13 @@ def view_high_score(screen):
                     for score in high_scores:
                         
                         score_text = f"High Score {count}: {score.strip()}"
-                        u.outline_text(screen, score_text, (36 + y_offset))
+                        u.outline_text(screen, score_text, (36 + y_offset), s.FONT)
                         y_offset += 50  # Increment Y offset for next score
                         count += 1
                 else:
-                    u.outline_text(screen, "No high scores recorded", 36 )
+                    u.outline_text(screen, "No high scores recorded", 36, s.FONT)
         except FileNotFoundError:
-            u.outline_text(screen, "No high scores recorded", 36)
+            u.outline_text(screen, "No high scores recorded", 36, s.FONT)
 
         pygame.display.flip()
     # Example usage of destroy_asteroid function

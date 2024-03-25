@@ -1,29 +1,171 @@
 {
-    "ethics" : [
-        {
-            "question": "This is Question 1",
-            "choice_1": "If this is",
-            "choice_2": "going to be",
-            "choice_3": "a multiple choice question",
-            "choice_4": "then here goes the text."
-        },
-        {
-            "question": "This is question 2",
-            "choice_1": "True or false",
-            "choice_2": "True or false"
-        },
-        {
-            "question": "This is question 3",
-            "choice_1": "True or false",
-            "choice_2": "True or false"
-        }
-    ],
-    "Other Questions" : [
-        {
-
-        },
-        {
-
-        }
-    ]
+    "ACM Ethics": [
+      {
+        "type": "multiple-choice",
+        "question": "Which of the following is one of the core ethical principles outlined in the ACM Code of Ethics and Professional Conduct?",
+        "options": [
+          "Profit maximization at all costs",
+          "Ensuring job security at all times",
+          "Respect for the privacy and confidentiality of users' data",
+          "Avoiding competition with other professionals"
+        ],
+        "correct_answer": "Respect for the privacy and confidentiality of users' data"
+      },
+      {
+        "type": "multiple-choice",
+        "question": "According to the ACM Code of Ethics, which of the following is not a responsibility of computing professionals?",
+        "options": [
+          "Respecting the intellectual property of others",
+          "Ensuring that their work is used for malicious purposes",
+          "Avoiding harm to others",
+          "Being honest and trustworthy"
+        ],
+        "correct_answer": "Ensuring that their work is used for malicious purposes"
+      },
+      {
+        "type": "multiple-choice",
+        "question": "Which of the following best describes the ACM Code of Ethics' stance on discrimination and harassment?",
+        "options": [
+          "Discrimination and harassment are acceptable in certain situations",
+          "Discrimination and harassment should be tolerated if it benefits the organization",
+          "Discrimination and harassment are never acceptable",
+          "Discrimination and harassment are acceptable if they are not reported"
+        ],
+        "correct_answer": "Discrimination and harassment are never acceptable"
+      },
+      {
+        "type": "multiple-choice",
+        "question": "According to the ACM Code of Ethics, what is the responsibility of computing professionals towards society?",
+        "options": [
+          "To promote their own interests above all",
+          "To act in a manner that always benefits society",
+          "To prioritize the interests of their employers",
+          "To be solely focused on technological advancement"
+        ],
+        "correct_answer": "To act in a manner that always benefits society"
+      },
+      {
+        "type": "multiple-choice",
+        "question": "Which of the following is NOT a value that the ACM Code of Ethics emphasizes?",
+        "options": [
+          "Integrity",
+          "Loyalty to the employer",
+          "Respect for intellectual property",
+          "Professional development"
+        ],
+        "correct_answer": "Loyalty to the employer"
+      },
+      {
+        "type": "true-false",
+        "question": "The ACM Code of Ethics encourages computing professionals to respect the privacy of individuals.",
+        "correct_answer": "True"
+      },
+      {
+        "type": "true-false",
+        "question": "According to the ACM Code of Ethics, it is acceptable for computing professionals to engage in deceptive behavior to further their career.",
+        "correct_answer": "False"
+      },
+      {
+        "type": "true-false",
+        "question": "The ACM Code of Ethics states that computing professionals should strive to achieve high quality in their work.",
+        "correct_answer": "True"
+      },
+      {
+        "type": "true-false",
+        "question": "The ACM Code of Ethics does not address the responsibility of computing professionals towards environmental sustainability.",
+        "correct_answer": "False"
+      },
+      {
+        "type": "true-false",
+        "question": "The ACM Code of Ethics prohibits discrimination based on factors such as race, gender, and sexual orientation.",
+        "correct_answer": "True"
+      },
+      {
+        "type": "multiple-choice",
+        "question": "According to the ACM Code of Ethics, what should computing professionals do in situations of conflict between organizational and individual interests?",
+        "options": [
+          "Prioritize organizational interests",
+          "Prioritize individual interests",
+          "Seek guidance from management",
+          "Balance conflicting interests impartially"
+        ],
+        "correct_answer": "Balance conflicting interests impartially"
+      },
+      {
+        "type": "multiple-choice",
+        "question": "What does the ACM Code of Ethics recommend regarding the disclosure of conflicts of interest?",
+        "options": [
+          "Computing professionals should conceal conflicts of interest to avoid negative consequences",
+          "Computing professionals should disclose conflicts of interest unless they are minor",
+          "Computing professionals are not required to disclose conflicts of interest",
+          "Disclosure of conflicts of interest is mandatory"
+        ],
+        "correct_answer": "Disclosure of conflicts of interest is mandatory"
+      },
+      {
+        "type": "multiple-choice",
+        "question": "Which of the following is NOT emphasized by the ACM Code of Ethics regarding professional development?",
+        "options": [
+          "Continuously improving skills and expertise",
+          "Contributing to the knowledge base of the profession",
+          "Maintaining technological superiority over peers",
+          "Assisting colleagues in professional development"
+        ],
+        "correct_answer": "Maintaining technological superiority over peers"
+      },
+      {
+        "type": "multiple-choice",
+        "question": "What does the ACM Code of Ethics recommend regarding the use of technology to engage in deceptive practices?",
+        "options": [
+          "Such practices are acceptable if they benefit the organization",
+          "Such practices are acceptable if they are not illegal",
+          "Such practices are never acceptable",
+          "Such practices are acceptable if they do not harm others"
+        ],
+        "correct_answer": "Such practices are never acceptable"
+      },
+      {
+        "type": "true-false",
+        "question": "The ACM Code of Ethics encourages computing professionals to take responsibility for their own learning and skill development.",
+        "correct_answer": "True"
+      },
+      {
+        "type": "true-false",
+        "question": "The ACM Code of Ethics does not require computing professionals to maintain confidentiality in their professional interactions.",
+        "correct_answer": "False"
+      },
+      {
+        "type": "true-false",
+        "question": "The ACM Code of Ethics states that computing professionals should avoid harm to others through their actions.",
+        "correct_answer": "True"
+      },
+      {
+        "type": "true-false",
+        "question": "According to the ACM Code of Ethics, computing professionals should strive to make computing technology accessible to all.",
+        "correct_answer": "True"
+      },
+      {
+        "type": "multiple-choice",
+        "question": "What does the ACM Code of Ethics recommend regarding conflicts of interest?",
+        "options": [
+          "Computing professionals should avoid any situation that may lead to a conflict of interest",
+          "Conflicts of interest should always be resolved in favor of the computing professional",
+          "Conflicts of interest should be resolved in favor of the organization",
+          "Conflicts of interest should be disclosed and resolved impartially"
+        ],
+        "correct_answer": "Conflicts of interest should be disclosed and resolved impartially"
+      },
+      {
+        "type": "multiple-choice",
+        "question": "According to the ACM Code of Ethics, what should computing professionals do if they encounter unethical behavior in the workplace?",
+        "options": [
+          "Ignore the behavior to avoid conflict",
+          "Report the behavior through appropriate channels",
+          "Confront the individual engaging in unethical behavior directly",
+          "Participate in the unethical behavior to avoid being singled out"
+        ],
+        "correct_answer": "Report the behavior through appropriate channels"
+    }
+  ]
 }
+  
