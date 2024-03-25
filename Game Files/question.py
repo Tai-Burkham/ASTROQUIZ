@@ -71,13 +71,12 @@ def display_question(screen, questions):
                 pygame.quit()
                 return False
             elif event.type == pygame.MOUSEBUTTONDOWN:
-                # Check if the player clicked on an option
-                for option_rect in option_rects:
+                for option_rect, option_text in zip(option_rects, choices if type == "multiple-choice" else ["True", "False"]):
                     if option_rect.collidepoint(event.pos):
                         # Check the correctness of the answer and return
-                        if type == "Multiple-choice":
-                            selected_option_index = option_rects.index(option_rect)
-                            correct_answer_index = choices.index(question_data["correct_answer"])
-                            return selected_option_index == correct_answer_index
+                        if type == "multiple-choice":
+                            selected_option_text = option_text
                         else:
-                            return option_rects.index(option_rect) == question_data["correct_answer"]  # Assuming "True" is the first option
+                            selected_option_text = "True" if option_text == "True" else "False"
+
+                        return selected_option_text == question_data["correct_answer"]
