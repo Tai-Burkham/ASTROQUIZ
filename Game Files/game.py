@@ -150,7 +150,7 @@ def game(screen):
                             asteroids_destroyed += 1
                             
                             # Check for question call
-                            if asteroids_destroyed % 7 == 0: # change frequency of questions
+                            if asteroids_destroyed % 2 == 0: # change frequency of questions
                                 num_questions += 1
                                 correct_answer = display_question(screen, questions)
 

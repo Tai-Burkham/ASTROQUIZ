@@ -9,6 +9,26 @@ def load_questions(filename, series):
         questions_data = json.load(file)
     return questions_data[series]
 
+def get_series_list(filename="Game Files/data/questions.json"):
+    with open(filename, "r") as file:
+        data = json.load(file)
+    
+    series_names = list(data.keys())
+    return series_names
+
+def add_new_series(name, filename="Game Files/data/questions.json"):
+    # Load existing JSON data
+    with open(filename, "r") as file:
+        data = json.load(file)
+
+    # Add a new key-value pair
+    data[name] = []
+
+    # Save the updated JSON data back to the file
+    with open(filename, "w") as file:
+        json.dump(data, file, indent=4)
+
+    print(f"New series '{name}' added to questions.json")   
 
 def display_question(screen, questions):
     # Choose a random question
