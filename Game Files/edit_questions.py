@@ -14,9 +14,13 @@ def edit_questions(screen) :
     new_series_name = ""
     enter_new_series = False
     enter_question_text = False
+    enter_choice_text = False
+    selecting_answer = False
     selected_series_rect = None
     question_index = 0
     num_of_questions = 0
+    choice_index = -1
+    choice_text = ""
     true_box = u.outline_text(screen, "", -100, s.FONT, -100)
     false_box = u.outline_text(screen, "", -100, s.FONT)
 
@@ -45,11 +49,23 @@ def edit_questions(screen) :
                     change_correct_answer("True", question_index, selectedSeries)
                 elif false_box.collidepoint(event.pos) and (questions[question_index]["correct_answer"] == "True" or questions[question_index]["correct_answer"] == ""):
                     change_correct_answer("False", question_index, selectedSeries)
+                elif select_button_rect.collidepoint(event.pos):
+                    selecting_answer = True
+                elif any(choice_box_rect.collidepoint(event.pos) for choice_box_rect in bottom_right_boxes) and selecting_answer == True:
+                    choice_index = [i for i, choice_box_rect in enumerate(bottom_right_boxes) if choice_box_rect.collidepoint(event.pos)][0]
+                    selected_answer_text = questions[question_index]["options"][choice_index]
+                    change_correct_answer(selected_answer_text, question_index, selectedSeries)
 
                 # right click
                 if event.button == 3:
                     if question_box_rect.collidepoint(event.pos):
                         enter_question_text = True
+                    elif any(choice_box_rect.collidepoint(event.pos) for choice_box_rect in bottom_right_boxes):
+                        # Right-clicked on a choice box
+                        choice_index = [i for i, choice_box_rect in enumerate(bottom_right_boxes) if choice_box_rect.collidepoint(event.pos)][0]
+                        enter_choice_text = True
+                    selecting_answer = False
+
 
             # Handle text input events
             elif event.type == pygame.KEYDOWN:
@@ -76,6 +92,19 @@ def edit_questions(screen) :
                         question_text = original_text
                     else:
                         question_text += event.unicode
+                if enter_choice_text:
+                    original_text = questions[question_index]["options"][choice_index]
+                    if event.key == pygame.K_BACKSPACE:
+                        if choice_text:  # Check if choice_text is not empty before removing the last character
+                            choice_text = choice_text[:-1]  # Remove last character
+                    elif event.key == pygame.K_RETURN:
+                        edit_answer_choice(choice_text, choice_index, question_index, selectedSeries)
+                        enter_choice_text = False
+                    elif event.key == pygame.K_ESCAPE:
+                        enter_choice_text = False
+                        choice_text = original_text
+                    else:
+                        choice_text += event.unicode
 
         screen.fill(TRANSPARENT)
         screen.blit(background_image, (0, 0)) 
@@ -108,6 +137,7 @@ def edit_questions(screen) :
             series_rect = u.outline_text(screen, series, series_y, s.FONT, -330 - offset)
             if series_rect.collidepoint(pygame.mouse.get_pos()) and pygame.mouse.get_pressed()[0]:
                 selectedSeries = series  # Change selected series if clicked
+                s.question_series = selectedSeries
                 selected_series_rect = series_rect
                 question_index = 0
             series_y += 40
@@ -140,9 +170,11 @@ def edit_questions(screen) :
                 bottom_right_boxes.append(bottom_right_box)
                 pygame.draw.rect(screen, s.WHITE, bottom_right_box, 2)
 
-            u.outline_text(screen, "Enter Correct Answer:", 510, s.FONT, -100)
+            u.outline_text(screen, "Correct Answer:", 510, s.FONT, -130)
             bottom_right_box_5 = pygame.Rect(220, 550, 670, 40)
             pygame.draw.rect(screen, s.WHITE, bottom_right_box_5, 2)
+
+            select_button_rect = u.outline_text_w_box(screen, "Select Answer", 510, s.FONT, 70)
 
         if selectedOption == 1:
             u.outline_text_w_box(screen, "True or False", 255, s.FONT, 350)
@@ -169,7 +201,11 @@ def edit_questions(screen) :
             if selectedOption == 0:
                 for i, option in enumerate(questions[question_index]["options"]):
                     choice_box_rect = bottom_right_boxes[i]
-                    choice_surface = u.render_textrect(option, s.FONT_SMALL, choice_box_rect.inflate(-20, -20), s.WHITE, TRANSPARENT)
+                    if enter_choice_text and i == choice_index:
+                        choice_surface = u.render_textrect(choice_text, s.FONT_SMALL, choice_box_rect.inflate(-20, -20), s.WHITE, TRANSPARENT)
+                    else:
+                        choice_surface = u.render_textrect(option, s.FONT_SMALL, choice_box_rect.inflate(-20, -20), s.WHITE, TRANSPARENT)
+
                     screen.blit(choice_surface, choice_box_rect.inflate(-20, -20).topleft)
             
                 correct_text = questions[question_index]["correct_answer"]

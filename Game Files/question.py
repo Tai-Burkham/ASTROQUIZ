@@ -85,6 +85,15 @@ def change_correct_answer(answer, index, series, filename="Game Files/data/quest
     with open("Game Files/data/questions.json", "w") as file:
         json.dump(data, file, indent=4)
 
+def edit_answer_choice(answer, choice_index, index, series):
+    with open("Game Files/data/questions.json", "r") as file:
+        data = json.load(file)
+
+    data[series][index]["options"][choice_index] = answer
+
+    with open("Game Files/data/questions.json", "w") as file:
+        json.dump(data, file, indent=4)
+        
 def display_question(screen, questions):
     # Choose a random question
     question_data = random.choice(questions)
