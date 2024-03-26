@@ -2,7 +2,7 @@
     "ACM Ethics": [
         {
             "type": "multiple-choice",
-            "question": "Which of the following is one of the core ethical principles outlined in the ACM Code of Ethics and Professional Conduct????",
+            "question": "Which of the following is one of the core ethical principles outlined in the ACM Code of Ethics and Professional Conduct?",
             "options": [
                 "Profit maximization at all costs",
                 "Ensuring job security at all times",
@@ -166,6 +166,5 @@
             ],
             "correct_answer": "Report the behavior through appropriate channels"
         }
-    ],
-    "Test Series": []
+    ]
 }

@@ -9,6 +9,7 @@ WIDTH, HEIGHT = 900, 600
 WHITE = (255, 255, 255)
 BLACK = (0, 0, 0)
 FONT = pygame.font.Font(None, 36)
+FONT_SMALL = pygame.font.Font(None, 24)
 TEXT_COLOR = (255, 255, 255)
 
 background_image = pygame.image.load("Game Files/assets/images/menubackground.jpg")

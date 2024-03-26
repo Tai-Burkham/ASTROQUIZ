@@ -28,7 +28,17 @@ def add_new_series(name, filename="Game Files/data/questions.json"):
     with open(filename, "w") as file:
         json.dump(data, file, indent=4)
 
-    print(f"New series '{name}' added to questions.json")   
+    print(f"New series '{name}' added to questions.json") 
+
+def edit_question_field(new_question, index, series, filename="Game Files/data/questions.json"):
+    with open("Game Files/data/questions.json", "r") as file:
+        data = json.load(file)
+
+    data[series][index]["question"] = new_question
+
+    with open("Game Files/data/questions.json", "w") as file:
+        json.dump(data, file, indent=4)
+      
 
 def display_question(screen, questions):
     # Choose a random question

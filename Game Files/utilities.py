@@ -39,9 +39,9 @@ def render_textrect(string, font, rect, text_color, background_color, justificat
     """
     final_lines = []
     requested_lines = string.splitlines()
+    
     # Create a rectangle to contain the text
-    surface = pygame.Surface(rect.size)
-    surface.fill(background_color)
+    surface = pygame.Surface(rect.size, pygame.SRCALPHA)
     # Break the text into lines that fit in the rectangle
     for requested_line in requested_lines:
         words = requested_line.split(' ')
