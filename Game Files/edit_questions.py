@@ -17,6 +17,8 @@ def edit_questions(screen) :
     selected_series_rect = None
     question_index = 0
     num_of_questions = 0
+    true_box = u.outline_text(screen, "", -100, s.FONT, -100)
+    false_box = u.outline_text(screen, "", -100, s.FONT)
 
     while running:
         # Handles events, This is where all mouse and keyboard inputs will be
@@ -26,16 +28,25 @@ def edit_questions(screen) :
             elif event.type == pygame.MOUSEBUTTONDOWN:
                 if option_rect.collidepoint(event.pos):
                     if selectedOption == 1:
-                        selectedOption = 0
+                        change_question_type(0, question_index, selectedSeries)
                     else:
-                        selectedOption = 1
+                        change_question_type(1, question_index, selectedSeries)
                 elif new_series_rect.collidepoint(event.pos):
                     enter_new_series = True
                 elif next_button_rect.collidepoint(event.pos) and question_index < num_of_questions - 1:
                     question_index += 1
                 elif back_button_rect.collidepoint(event.pos) and question_index > 0:
                     question_index -= 1
-                
+                elif remove_button_rect.collidepoint(event.pos) and num_of_questions > 0:
+                    delete_question_from_series(question_index, selectedSeries)
+                elif new_button_rect.collidepoint(event.pos):
+                    new_question(selectedSeries)
+                elif true_box.collidepoint(event.pos) and (questions[question_index]["correct_answer"] == "False" or questions[question_index]["correct_answer"] == ""):
+                    change_correct_answer("True", question_index, selectedSeries)
+                elif false_box.collidepoint(event.pos) and (questions[question_index]["correct_answer"] == "True" or questions[question_index]["correct_answer"] == ""):
+                    change_correct_answer("False", question_index, selectedSeries)
+
+                # right click
                 if event.button == 3:
                     if question_box_rect.collidepoint(event.pos):
                         enter_question_text = True
@@ -71,15 +82,17 @@ def edit_questions(screen) :
 
         questions = load_questions("Game Files/data/questions.json", selectedSeries)
         num_of_questions = len(questions)
+        if num_of_questions <= 0:
+            new_question(selectedSeries)
         u.outline_text(screen, f"Edit questions for {selectedSeries}", 10, s.FONT, -265)
-        u.outline_text(screen, "Enter Question:", 50, s.FONT, -130)
+        u.outline_text(screen, f"Enter Question: ({question_index}/{num_of_questions})", 50, s.FONT, -100 if question_index < 10 else -93)
         u.outline_text(screen, "Choose Question Type:", 255, s.FONT, -90)
 
         # UI Buttons
         next_button_rect = u.outline_text_w_box(screen, "Next", 10, s.FONT, 405)
         back_button_rect = u.outline_text_w_box(screen, "Back", 10, s.FONT, 325)
-        save_button_rect = u.outline_text_w_box(screen, "Save", 10, s.FONT, 243)
-        new_button_rect = u.outline_text_w_box(screen, "New Question", 10, s.FONT, 106)
+        remove_button_rect = u.outline_text_w_box(screen, "Remove", 10, s.FONT, 224)
+        new_button_rect = u.outline_text_w_box(screen, "New Question", 10, s.FONT, 69)
         new_series_rect = u.outline_text_w_box(screen, "New Series", 550, s.FONT, -340)
 
         # Series Box
@@ -166,9 +179,9 @@ def edit_questions(screen) :
             
             if selectedOption == 1:
                 if questions[question_index]["correct_answer"] == "True":
-                    correct_box = pygame.Rect(400, 330, 100, 50)
-                else:
                     correct_box = pygame.Rect(300, 330, 100, 50)
+                else:
+                    correct_box = pygame.Rect(400, 330, 100, 50)
                 pygame.draw.rect(screen, s.WHITE, correct_box, 2)
 
 

@@ -2,7 +2,7 @@
     "ACM Ethics": [
         {
             "type": "multiple-choice",
-            "question": "Which of the following is one of the core ethical principles outlined in the ACM Code of Ethics and Professional Conduct????",
+            "question": "Which of the following is one of the core ethical principles outlined in the ACM Code of Ethics and Professional Conduct?",
             "options": [
                 "Profit maximization at all costs",
                 "Ensuring job security at all times",
@@ -10,28 +10,6 @@
                 "Avoiding competition with other professionals"
             ],
             "correct_answer": "Respect for the privacy and confidentiality of users' data"
-        },
-        {
-            "type": "multiple-choice",
-            "question": "According to the ACM Code of Ethics, which of the following is not a responsibility of computing professionals?",
-            "options": [
-                "Respecting the intellectual property of others",
-                "Ensuring that their work is used for malicious purposes",
-                "Avoiding harm to others",
-                "Being honest and trustworthy"
-            ],
-            "correct_answer": "Ensuring that their work is used for malicious purposes"
-        },
-        {
-            "type": "multiple-choice",
-            "question": "Which of the following best describes the ACM Code of Ethics' stance on discrimination and harassment?",
-            "options": [
-                "Discrimination and harassment are acceptable in certain situations",
-                "Discrimination and harassment should be tolerated if it benefits the organization",
-                "Discrimination and harassment are never acceptable",
-                "Discrimination and harassment are acceptable if they are not reported"
-            ],
-            "correct_answer": "Discrimination and harassment are never acceptable"
         },
         {
             "type": "multiple-choice",
@@ -167,5 +145,17 @@
             "correct_answer": "Report the behavior through appropriate channels"
         }
     ],
-    "Test Series": []
+    "Test Series": [
+        {
+            "type": "true-false",
+            "question": "Right click on boxes to edit. Enter your question here. Choose the type of question below and enter in the possible choices for multiple choice and select the correct answer or select the correct answer for true and false.",
+            "options": [
+                "",
+                "",
+                "",
+                ""
+            ],
+            "correct_answer": "True"
+        }
+    ]
 }

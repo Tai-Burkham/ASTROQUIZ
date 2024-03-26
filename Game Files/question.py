@@ -39,6 +39,51 @@ def edit_question_field(new_question, index, series, filename="Game Files/data/q
     with open("Game Files/data/questions.json", "w") as file:
         json.dump(data, file, indent=4)
       
+def delete_question_from_series(index, series, filename="Game Files/data/questions.json"):
+    with open("Game Files/data/questions.json", "r") as file:
+        data = json.load(file)
+
+    del data[series][index]
+
+    with open("Game Files/data/questions.json", "w") as file:
+        json.dump(data, file, indent=4)
+
+def new_question(series, filename="Game Files/data/questions.json"):
+    with open("Game Files/data/questions.json", "r") as file:
+        data = json.load(file)
+
+    new_question = {
+        "type": "multiple-choice",
+        "question": "Right click on boxes to edit. Enter your question here. Choose the type of question below and enter in the possible choices for multiple choice and select the correct answer or select the correct answer for true and false.",
+        "options": ["", "", "", ""],
+        "correct_answer": ""
+    }
+
+    data[series].append(new_question)
+
+    with open("Game Files/data/questions.json", "w") as file:
+        json.dump(data, file, indent=4)
+
+def change_question_type(type, index, series, filename="Game Files/data/questions.json"):
+    with open("Game Files/data/questions.json", "r") as file:
+        data = json.load(file)
+
+    if type == 0:
+        data[series][index]["type"] = "multiple-choice"
+    elif type == 1:
+        data[series][index]["type"] = "true-false"
+    
+    with open("Game Files/data/questions.json", "w") as file:
+        json.dump(data, file, indent=4)
+
+def change_correct_answer(answer, index, series, filename="Game Files/data/questions.json"):
+    with open("Game Files/data/questions.json", "r") as file:
+        data = json.load(file)
+
+    data[series][index]["correct_answer"] = answer
+
+    with open("Game Files/data/questions.json", "w") as file:
+        json.dump(data, file, indent=4)
 
 def display_question(screen, questions):
     # Choose a random question
