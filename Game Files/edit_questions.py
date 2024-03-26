@@ -13,6 +13,7 @@ def edit_questions(screen) :
     selectedOption = 0
     new_series_name = ""
     enter_new_series = False
+    selected_series_rect = None
 
     while running:
         # Handles events, This is where all mouse and keyboard inputs will be
@@ -69,17 +70,26 @@ def edit_questions(screen) :
         # Display series list
         series_y = 80
         series_list = get_series_list()
+        
         for series in series_list:
             offset = len(series)
             series_rect = u.outline_text(screen, series, series_y, s.FONT, -330 - offset)
-            if series_rect.collidepoint(pygame.mouse.get_pos()):
+            if series_rect.collidepoint(pygame.mouse.get_pos()) and pygame.mouse.get_pressed()[0]:
                 selectedSeries = series  # Change selected series if clicked
+                selected_series_rect = series_rect
             series_y += 40
-        
+
+        # Underline the selected series
+        if selected_series_rect:
+            underline_rect = pygame.Rect(selected_series_rect.left, selected_series_rect.bottom - 2, selected_series_rect.width, 2)
+            pygame.draw.rect(screen, (255, 255, 255), underline_rect)
+        # Initial underline for ACM Ethics
+        else:
+            pygame.draw.line(screen, (255, 255, 255), (33, 111), (187, 111), 2)
+
         # Render text input box for new series name
         if enter_new_series:
-            # u.outline_text(screen, "Enter New Series Name:", 290, s.FONT, -240)
-            new_series_name_rect = u.outline_text_w_box(screen, new_series_name, series_y, s.FONT, -340)
+            u.outline_text_w_box(screen, new_series_name, series_y, s.FONT, -340)
         
 
 
