@@ -1,7 +1,7 @@
 import pygame
 import math
 import time
-from settings import WIDTH, HEIGHT
+import settings as s
 
 ACCELERATION = 0.5
 MAX_SPEED = 5
@@ -15,7 +15,7 @@ is_blinking = False
 invulnerability_start_time = 0
 blink_last_toggle_time = 0
 
-ship_image = pygame.image.load("Game Files/assets/images/Spaceship_1.png")
+ship_image = pygame.image.load(s.ship_image_file)
 ship_image = pygame.transform.rotate(ship_image, -90)
 
 class Ship(pygame.sprite.Sprite):
@@ -24,7 +24,7 @@ class Ship(pygame.sprite.Sprite):
         self.original_image = pygame.transform.scale(ship_image, (75, 75))
         self.image = self.original_image  # Set the initial image
         self.rect = self.image.get_rect()
-        self.rect.center = (WIDTH // 2, HEIGHT // 2)
+        self.rect.center = (s.WIDTH // 2, s.HEIGHT // 2)
         self.angle = 0
         self.x_speed = 0
         self.y_speed = 0
@@ -74,13 +74,13 @@ class Ship(pygame.sprite.Sprite):
         self.rect.y += self.y_speed
 
         # Wrap around screen edges, This will need some adjustment
-        if self.rect.left > WIDTH - 10:  # Ship has moved off the right edge
+        if self.rect.left > s.WIDTH - 10:  # Ship has moved off the right edge
             self.rect.right = 25  # Move ship to the left edge
         elif self.rect.right < 10:  # Ship has moved off the left edge
-            self.rect.left = WIDTH - 25  # Move ship to the right edge
+            self.rect.left = s.WIDTH - 25  # Move ship to the right edge
         if self.rect.bottom < 10:  # Ship has moved off the top edge
-            self.rect.top = HEIGHT - 25  # Move ship to the bottom edge
-        elif self.rect.top > HEIGHT - 10:  # Ship has moved off the bottom edge
+            self.rect.top = s.HEIGHT - 25  # Move ship to the bottom edge
+        elif self.rect.top > s.HEIGHT - 10:  # Ship has moved off the bottom edge
             self.rect.bottom = 25  # Move ship to the top edge
 
         # Toggle visibility if blinking
@@ -92,8 +92,8 @@ class Ship(pygame.sprite.Sprite):
 
     def respawn_ship(ship):
         """Respawn the ship in the center of the game map."""
-        ship.rect.centerx = WIDTH // 2
-        ship.rect.centery = HEIGHT // 2
+        ship.rect.centerx = s.WIDTH // 2
+        ship.rect.centery = s.HEIGHT // 2
         # Stop player's momentum
         ship.x_speed = 0
         ship.y_speed = 0

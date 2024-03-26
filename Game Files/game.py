@@ -150,7 +150,7 @@ def game(screen):
                             asteroids_destroyed += 1
                             
                             # Check for question call
-                            if asteroids_destroyed % 2 == 0: # change frequency of questions
+                            if asteroids_destroyed % 7 == 0: # change frequency of questions
                                 num_questions += 1
                                 correct_answer = display_question(screen, questions)
 
@@ -204,7 +204,7 @@ def game(screen):
                         result_text = font.render("Correct!", True, (255, 255, 255))
                     else:
                         result_text = font.render("Incorrect", True, (255, 0, 0))
-                    screen.blit(result_text, ((WIDTH // 2) - 30, 10))
+                    screen.blit(result_text, ((s.WIDTH // 2) - 30, 10))
 
                 # Render the cureent score
                 score_text = font.render(f"Score: {score} x {score_multiplier}", True, (255, 0, 0))
