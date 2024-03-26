@@ -64,6 +64,7 @@ def edit_questions(screen) :
                         # Right-clicked on a choice box
                         choice_index = [i for i, choice_box_rect in enumerate(bottom_right_boxes) if choice_box_rect.collidepoint(event.pos)][0]
                         enter_choice_text = True
+                        choice_text = questions[question_index]["options"][choice_index]
                     selecting_answer = False
 
 
@@ -80,7 +81,7 @@ def edit_questions(screen) :
                         new_series_name = ""
                     else:
                         new_series_name += event.unicode  # Append typed character to series name
-                if enter_question_text:
+                elif enter_question_text:
                     original_text = question_text
                     if event.key == pygame.K_BACKSPACE:
                         question_text = question_text[:-1]  # Remove last character
@@ -92,7 +93,7 @@ def edit_questions(screen) :
                         question_text = original_text
                     else:
                         question_text += event.unicode
-                if enter_choice_text:
+                elif enter_choice_text:
                     original_text = questions[question_index]["options"][choice_index]
                     if event.key == pygame.K_BACKSPACE:
                         if choice_text:  # Check if choice_text is not empty before removing the last character
@@ -105,6 +106,9 @@ def edit_questions(screen) :
                         choice_text = original_text
                     else:
                         choice_text += event.unicode
+                else:
+                    if event.key == pygame.K_ESCAPE:
+                        running = False
 
         screen.fill(TRANSPARENT)
         screen.blit(background_image, (0, 0)) 
