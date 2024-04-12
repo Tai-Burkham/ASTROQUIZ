@@ -43,3 +43,10 @@ Michelle: ### Edit Quesitons:
 - need a way to select which group of questions we editing (ehtics, others)
 - all of these should interact with the json file
 
+NEEDS TO BE DONE:
+
+SOUND NEEDS TO BE ADDED
+Settings needs to be fixed : ship picking
+high score page needs to be done
+high score from the game needs a a place to be saved to
+add comments to all code 
