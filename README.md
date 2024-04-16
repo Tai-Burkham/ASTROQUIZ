@@ -3,50 +3,25 @@
 Github for Astroquiz
 
 ## Todo
+### General
+Comments throughout code.
+Comment out code that sends notifications to the console after testing is complete.
+
 ### Main
-- Before game starts there should be instructions on controls, we can either have this pop up after play is pushed or have it on the side of the main screen or any other ideas.
+Need to add instructions on how to play the game as either a pop up after you hit play game or as static information on the main menu page.
 
-ahmed/ calvin:
-### Game:
-- add health status
-- change score text color to outline text
-- add questions window
-- add questions interaction
-- add powerups
-- need to add sounds for shooting, destruction, points, music
-- add supply crates for questions
-- quesitons pop with timer 
+### High Scores
+We need 3 columns at least where it shows the players score, how many questions correct/incorrect, and which question set was used.
+We need a title for that slide
+We need to add a main menu button on the bottom right of the page.
+Refer to edit questions for formatting ideas
 
-### Game Over:
-- add way to input player name
-- save high score with name
-- add button to see high scores on game over screen
-- resize game over box for new content
+### Settings
+Current ship is stuck on ship3. It should be able to be changed in the settings and when you leave the settings and go back again it should remain on the selected ship.
+Need to add a default button for settings.
+Need to add a save button for settings
+Need to add a return to menu button on the bottom right of screen
+Need to restore ACM Ethics questions when restore default button is pressed.
+Need to add a variable for asteroid coutn to settings. on easy asteroid count should be 10 on hard asteroid coutn should be 15.
 
-### High Scores:
-- add way to save scores based on questions used (late implementation)
-- record player name and question set when recording score
-- add way to reset scores
-- how many scores should it keep?
-
-Tailor: ### Settings:
-- add way to resize window (late implementaiton, will require changing sizes in entire code)
-- need settings for increased difficulty (easy, medium, hard) this will increase asteroid amount and speed, will need to pull this setting from the settings file
-- in settings we should be able to change our ship, we will need to find other ship styles
-- will need a way to turn questions off completely in here
-- adjust volume for music and and sound effect
-
-Michelle: ### Edit Quesitons:
-- need to set up the interface for adding questions.
-- will need the type of question (multiple choice, true false) option
-- will need input fields for the question and the choices
-- need a way to select which group of questions we editing (ehtics, others)
-- all of these should interact with the json file
-
-NEEDS TO BE DONE:
-
-SOUND NEEDS TO BE ADDED
-Settings needs to be fixed : ship picking
-high score page needs to be done
-high score from the game needs a a place to be saved to
-add comments to all code 
+### 
