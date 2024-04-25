@@ -1,7 +1,5 @@
 import pygame
 import utilities as u
-# from ship import *
-# from game import *
 
 # needed for font setting
 pygame.init()
@@ -28,8 +26,6 @@ spaceship_2 = pygame.image.load("Game Files/assets/images/spaceship_2.png")
 spaceship_2 = pygame.transform.scale(spaceship_2, (150,150))
 spaceship_3 = pygame.image.load("Game Files/assets/images/spaceship_3.png")
 spaceship_3 = pygame.transform.scale(spaceship_3, (150,150))
-
-# saveShip_button = None
 
 ship_image_file = "Game Files/assets/images/spaceship_1.png" 
 question_series = "ACM Ethics"
@@ -84,16 +80,13 @@ def edit_settings(screen):
 
                     elif back_button.collidepoint(mouse_pos):
                     # Navigate back to the main page
-                    # The implementation depends on how you've structured your game
                         running = False
                     elif save_button.collidepoint(mouse_pos):
                     # Save the current settings
-                        # running = False
                         with open('settings.txt', 'w') as f:
                             f.write(f'selected_ship={selected_ship}\n')
                             f.write(f'ship_image_file={ship_image_file}\n')
 
-                        # Ship.change_ship(game.ship)
                         running = False
 
         screen.fill(WHITE)
@@ -136,7 +129,3 @@ def edit_settings(screen):
         back_button = u.outline_text_w_box(screen, "BACK", 500, FONT, -370)
 
         pygame.display.flip()
-
-
-        #difficulty 
-        #resize the game page
