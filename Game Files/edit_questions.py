@@ -23,6 +23,7 @@ def edit_questions(screen) :
     choice_text = ""
     true_box = u.outline_text(screen, "", -100, s.FONT, -100)
     false_box = u.outline_text(screen, "", -100, s.FONT)
+    back_button = u.outline_text_w_box(screen, "", 500, s.FONT, -370)   
 
     while running:
         # Handles events, This is where all mouse and keyboard inputs will be
@@ -55,6 +56,8 @@ def edit_questions(screen) :
                     choice_index = [i for i, choice_box_rect in enumerate(bottom_right_boxes) if choice_box_rect.collidepoint(event.pos)][0]
                     selected_answer_text = questions[question_index]["options"][choice_index]
                     change_correct_answer(selected_answer_text, question_index, selectedSeries)
+                elif back_button.collidepoint(event.pos):
+                    running = False
 
                 # right click
                 if event.button == 3:
@@ -126,10 +129,11 @@ def edit_questions(screen) :
         back_button_rect = u.outline_text_w_box(screen, "Back", 10, s.FONT, 325)
         remove_button_rect = u.outline_text_w_box(screen, "Remove", 10, s.FONT, 224)
         new_button_rect = u.outline_text_w_box(screen, "New Question", 10, s.FONT, 69)
-        new_series_rect = u.outline_text_w_box(screen, "New Series", 550, s.FONT, -340)
+        new_series_rect = u.outline_text_w_box(screen, "New Series", 500, s.FONT, -340)
+        back_button = u.outline_text_w_box(screen, "Main Menu", 550, s.FONT, -340)
 
         # Series Box
-        left_box = pygame.Rect(10, 50, 200, 480)
+        left_box = pygame.Rect(10, 50, 200, 430)
         pygame.draw.rect(screen, s.WHITE, left_box, 2)  # Draw left box with white outline
         
         # Display series list
