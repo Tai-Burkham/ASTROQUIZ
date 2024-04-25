@@ -9,7 +9,7 @@ Github for Astroquiz
 - We need music for the game. Doesnt have to be anything fancy just music that either starts when play game is selected or when the game starts on main menu.
 
 ### Main
-- Need to add instructions on how to play the game as either a pop up after you hit play game or as static information on the main menu page.
+- Need to add instructions on how to play the game as either a pop up after you hit play game or as static information on the main menu page. [DONE]
 
 ### Game
 - Need to add sound effects for game. We need sound for shooting, asteroid destruction, and ship destruction/damage. Use audacity to edit sound files. They should be either .mp3 or .wav
