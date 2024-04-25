@@ -1,0 +1,2 @@
+selected_ship=ship1
+ship_image_file=Game Files/assets/images/spaceship_1.png

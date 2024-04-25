@@ -1,3 +1,4 @@
+# contains utility functions for the game such as text wrapping and text rendering
 import pygame
 import textwrap
 import settings as s
@@ -5,20 +6,25 @@ import settings as s
 OUTLINE_COLOR = (0, 0, 0)
 # Outlines text without box
 def outline_text(screen, text, height, font, width=0) :
+    # Render the text
     text_outline = font.render(text, True, OUTLINE_COLOR)
     rendered_text = font.render(text, True, s.WHITE)
 
+    # Blit the text to the screen
     screen.blit(text_outline, (s.WIDTH // 2 - text_outline.get_width() // 2 - 1 + width, height))
     screen.blit(text_outline, (s.WIDTH // 2 - text_outline.get_width() // 2 + 1 + width, height))
     screen.blit(text_outline, (s.WIDTH // 2 - text_outline.get_width() // 2 + width, height - 1))
     screen.blit(text_outline, (s.WIDTH // 2 - text_outline.get_width() // 2 + width, height + 1))
     screen.blit(rendered_text, (s.WIDTH // 2 - rendered_text.get_width() // 2 + width, height))
 
+    # Create a rect for the button
     button_rect = pygame.Rect(s.WIDTH // 2 - rendered_text.get_width() // 2 - 10 + width, height - 7, rendered_text.get_width() + 20, 40)
 
     return button_rect
 
+# Outlines text with box
 def outline_text_w_box(screen, text, height, font, width = 0) :
+    # Render the text
     text_outline = font.render(text, True, OUTLINE_COLOR)
     rendered_text = font.render(text, True, s.WHITE)
 
@@ -33,10 +39,12 @@ def outline_text_w_box(screen, text, height, font, width = 0) :
 
     return button_rect
 
+# Wraps text
 def render_textrect(string, font, rect, text_color, background_color, justification=0):
     """Returns a surface containing the passed text, reformatted
     to fit within the given rect, word-wrapping as necessary.
     """
+    # Remove any leading or trailing newlines from the string
     final_lines = []
     requested_lines = string.splitlines()
     

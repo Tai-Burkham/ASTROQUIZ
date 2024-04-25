@@ -15,26 +15,57 @@ is_blinking = False
 invulnerability_start_time = 0
 blink_last_toggle_time = 0
 
-ship_image = pygame.image.load(s.ship_image_file)
-ship_image = pygame.transform.rotate(ship_image, -90)
+# ship_image = pygame.image.load(s.ship_image_file)
+# ship_image = pygame.transform.rotate(ship_image, -90)
+
+# Initialize default value
+ship_image = None
+ship_image_file = None
 
 class Ship(pygame.sprite.Sprite):
     def __init__(self):
         super().__init__()
-        self.original_image = pygame.transform.scale(ship_image, (75, 75))
-        self.image = self.original_image  # Set the initial image
-        self.rect = self.image.get_rect()
-        self.rect.center = (s.WIDTH // 2, s.HEIGHT // 2)
-        self.angle = 0
-        self.x_speed = 0
-        self.y_speed = 0
-        self.acceleration_x = 0
-        self.acceleration_y = 0
-        self.mask = pygame.mask.from_surface(self.image)
-        self.visible = True  # Add visible attribute
-        
+        self.original_image = None  # Initially set to None
+        self.load_ship_image()  # Load the ship image
+        if self.original_image is not None:
+            self.original_image = pygame.transform.scale(self.original_image, (75, 75))
+            self.image = self.original_image  # Set the initial image
+            self.rect = self.image.get_rect()
+            self.rect.center = (s.WIDTH // 2, s.HEIGHT // 2)
+            self.angle = 0
+            self.x_speed = 0
+            self.y_speed = 0
+            self.acceleration_x = 0
+            self.acceleration_y = 0
+            self.mask = pygame.mask.from_surface(self.image)
+            self.visible = True  # Add visible attribute
+
+    def load_ship_image(self):
+        global ship_image_file
+        # Read the settings file
+        with open('settings.txt', 'r') as f:
+            for line in f:
+                key, value = line.strip().split('=')
+                if key == 'ship_image_file':
+                    ship_image_file = value.strip()
+        print("Ship image file:", ship_image_file)  # Add this line to print the loaded ship image file
+        # Load the ship image
+        if ship_image_file is not None:
+            self.original_image = pygame.image.load(ship_image_file)
+            self.original_image = pygame.transform.rotate(self.original_image, -90)
+    
+    def update_ship_image(self):
+        self.load_ship_image()
+        if self.original_image is not None:
+            self.original_image = pygame.transform.scale(self.original_image, (75, 75))
+            self.image = self.original_image  # Set the image
+            self.rect = self.image.get_rect()
+            self.rect.center = (s.WIDTH // 2, s.HEIGHT // 2)
+            self.mask = pygame.mask.from_surface(self.image)
+
     def update(self, forward, reverse, left_turn, right_turn):
         global is_blinking
+        self.update_ship_image()
         # Rotate the ship, adjust self.angle for turning speed
         if left_turn:
             self.angle -= 5
@@ -89,6 +120,22 @@ class Ship(pygame.sprite.Sprite):
         else:
             self.visible = True
 
+    # def change_ship(self):
+    #     global ship_image, ship_image_file
+    #     # Read the settings file
+    #     with open('settings.txt', 'r') as f:
+    #         for line in f:
+    #             key, value = line.strip().split('=')
+    #             if key == 'ship_image_file':
+    #                 ship_image_file = value.strip()
+    #     # Load the ship image
+    #     if ship_image_file is not None:
+    #         new_ship_image = pygame.image.load(ship_image_file)
+    #         new_ship_image = pygame.transform.rotate(new_ship_image, -90)
+    #         # Update original_image to the new ship image
+    #         self.original_image = pygame.transform.scale(new_ship_image, (75, 75))
+    #         # Update the mask
+    #         self.mask = pygame.mask.from_surface(self.original_image)
 
     def respawn_ship(ship):
         """Respawn the ship in the center of the game map."""
