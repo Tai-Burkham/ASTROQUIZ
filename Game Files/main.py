@@ -5,6 +5,7 @@ import settings
 import high_scores
 import settings as s
 import utilities as u
+import instructions_screen 
 
 pygame.init()
 
@@ -64,6 +65,7 @@ def main():
             # Makes menu choices clickable
             elif event.type == pygame.MOUSEBUTTONDOWN:
                 if play_button_rect.collidepoint(event.pos):
+                    instructions_screen.instructions_screen(screen)
                     game.game(screen)
                 elif high_scores_button_rect.collidepoint(event.pos):
                     high_scores.view_high_score(screen)
