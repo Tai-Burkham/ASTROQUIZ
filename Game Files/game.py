@@ -27,11 +27,11 @@ WHITE = (255, 255, 255)
 RED = (255, 0, 0)
 
 # Load background image
-background_image = pygame.image.load("Game Files/assets/images/BG.jpg")
+background_image = pygame.image.load("assets/images/BG.jpg")
 background_image = pygame.transform.scale(background_image, (s.WIDTH, s.HEIGHT))
 
 # Load health Icon image
-health_image = pygame.image.load("Game Files/assets/images/health_heart.png")
+health_image = pygame.image.load("assets/images/health_heart.png")
 health_image = pygame.transform.scale(health_image, (40, 40))
 
 # Initializes ship sprite
@@ -74,7 +74,7 @@ def game(screen):
  
     # Load highest score
     highest_score = high_scores.load_high_score()
-    questions = load_questions("Game Files/data/questions.json", s.question_series) 
+    questions = load_questions("data/questions.json", s.question_series) 
 
     game_over = False
     game_paused = False

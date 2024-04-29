@@ -30,7 +30,7 @@ def load_questions(filename, series):
         questions_data = json.load(file)
     return questions_data[series]
 
-def get_series_list(filename="Game Files/data/questions.json"):
+def get_series_list(filename="data/questions.json"):
     """
     Get the list of question series from a JSON file.
 
@@ -46,7 +46,7 @@ def get_series_list(filename="Game Files/data/questions.json"):
     series_names = list(data.keys())
     return series_names
 
-def add_new_series(name, filename="Game Files/data/questions.json"):
+def add_new_series(name, filename="data/questions.json"):
     """
     Add a new question series to a JSON file.
 
@@ -83,12 +83,12 @@ def edit_question_field(new_question, index, series):
         None
     """
 
-    with open("Game Files/data/questions.json", "r") as file:
+    with open("data/questions.json", "r") as file:
         data = json.load(file)
 
     data[series][index]["question"] = new_question
 
-    with open("Game Files/data/questions.json", "w") as file:
+    with open("data/questions.json", "w") as file:
         json.dump(data, file, indent=4)
       
 def delete_question_from_series(index, series):
@@ -103,12 +103,12 @@ def delete_question_from_series(index, series):
         None
     """
 
-    with open("Game Files/data/questions.json", "r") as file:
+    with open("data/questions.json", "r") as file:
         data = json.load(file)
 
     del data[series][index]
 
-    with open("Game Files/data/questions.json", "w") as file:
+    with open("data/questions.json", "w") as file:
         json.dump(data, file, indent=4)
 
 def new_question(series):
@@ -122,7 +122,7 @@ def new_question(series):
         None
     """
 
-    with open("Game Files/data/questions.json", "r") as file:
+    with open("data/questions.json", "r") as file:
         data = json.load(file)
 
     new_question = {
@@ -134,7 +134,7 @@ def new_question(series):
 
     data[series].append(new_question)
 
-    with open("Game Files/data/questions.json", "w") as file:
+    with open("data/questions.json", "w") as file:
         json.dump(data, file, indent=4)
 
 def change_question_type(type, index, series):
@@ -150,7 +150,7 @@ def change_question_type(type, index, series):
         None
     """
 
-    with open("Game Files/data/questions.json", "r") as file:
+    with open("data/questions.json", "r") as file:
         data = json.load(file)
 
     if type == 0:
@@ -158,7 +158,7 @@ def change_question_type(type, index, series):
     elif type == 1:
         data[series][index]["type"] = "true-false"
     
-    with open("Game Files/data/questions.json", "w") as file:
+    with open("data/questions.json", "w") as file:
         json.dump(data, file, indent=4)
 
 def change_correct_answer(answer, index, series):
@@ -174,12 +174,12 @@ def change_correct_answer(answer, index, series):
         None
     """
 
-    with open("Game Files/data/questions.json", "r") as file:
+    with open("data/questions.json", "r") as file:
         data = json.load(file)
 
     data[series][index]["correct_answer"] = answer
 
-    with open("Game Files/data/questions.json", "w") as file:
+    with open("data/questions.json", "w") as file:
         json.dump(data, file, indent=4)
 
 def edit_answer_choice(answer, choice_index, index, series):
@@ -196,12 +196,12 @@ def edit_answer_choice(answer, choice_index, index, series):
         None
     """
 
-    with open("Game Files/data/questions.json", "r") as file:
+    with open("data/questions.json", "r") as file:
         data = json.load(file)
 
     data[series][index]["options"][choice_index] = answer
 
-    with open("Game Files/data/questions.json", "w") as file:
+    with open("data/questions.json", "w") as file:
         json.dump(data, file, indent=4)
         
 def display_question(screen, questions):

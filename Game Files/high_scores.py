@@ -11,7 +11,7 @@ import settings as s
 import utilities as u
 
 # Load the background image
-background_image = pygame.image.load("Game Files/assets/images/menubackground.jpg")
+background_image = pygame.image.load("assets/images/menubackground.jpg")
 background_image = pygame.transform.scale(background_image, (s.WIDTH, s.HEIGHT))
 
 # Define the back button

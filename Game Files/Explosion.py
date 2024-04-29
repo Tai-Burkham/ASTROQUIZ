@@ -31,7 +31,7 @@ class Explosion(pygame.sprite.Sprite):
         Loads the explosion animation frames.
         """
         for i in range(6):  # Assuming there are 6 frames in your explosion animation
-            img = pygame.image.load(f"Game Files/assets/images/explosion{i}.png")  # Load each frame
+            img = pygame.image.load(f"assets/images/explosion{i}.png")  # Load each frame
             img = pygame.transform.scale(img, (100, 100))  # Scale the image if needed
             self.images.append(img)  # Append the image to the list of frames
 

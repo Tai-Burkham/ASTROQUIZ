@@ -17,7 +17,7 @@ from question import *
 TRANSPARENT = (0, 0, 0, 0)
 
 # Loads background image
-background_image = pygame.image.load("Game Files/assets/images/menubackground.jpg")
+background_image = pygame.image.load("assets/images/menubackground.jpg")
 background_image = pygame.transform.scale(background_image, (s.WIDTH, s.HEIGHT))
 
 def edit_questions(screen):
@@ -163,7 +163,7 @@ def edit_questions(screen):
         screen.blit(background_image, (0, 0)) 
 
         # Load question data for selected series
-        questions = load_questions("Game Files/data/questions.json", selectedSeries)
+        questions = load_questions("data/questions.json", selectedSeries)
         num_of_questions = len(questions)
         if num_of_questions <= 0:
             new_question(selectedSeries)

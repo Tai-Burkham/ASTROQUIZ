@@ -27,11 +27,11 @@ screen = pygame.display.set_mode((s.WIDTH, s.HEIGHT))
 pygame.display.set_caption("ASTROQUIZ")
 
 # Load and set the window icon
-icon_image = pygame.image.load("Game Files/assets/images/Asteroid_3.png")
+icon_image = pygame.image.load("assets/images/Asteroid_3.png")
 pygame.display.set_icon(icon_image)
 
 # Load and scale the background image
-background_image = pygame.image.load("Game Files/assets/images/menubackground_title.jpg")
+background_image = pygame.image.load("assets/images/menubackground_title.jpg")
 background_image = pygame.transform.scale(background_image, (s.WIDTH, s.HEIGHT))
 
 # Function to display the main menu and return clickable boxes

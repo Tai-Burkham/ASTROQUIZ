@@ -12,7 +12,7 @@ import math
 import random
 from settings import WIDTH, HEIGHT
 
-asteroid_image = pygame.image.load("Game Files/assets/images/Asteroid_3.png")
+asteroid_image = pygame.image.load("assets/images/Asteroid_3.png")
 
 class Asteroid(pygame.sprite.Sprite):
     def __init__(self):

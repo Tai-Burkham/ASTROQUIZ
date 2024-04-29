@@ -33,19 +33,19 @@ back_button = pygame.Rect(50, 500, 100, 50)
 save_button = pygame.Rect(200, 500, 100, 50)
 
 # Load and scale background image
-background_image = pygame.image.load("Game Files/assets/images/menubackground.jpg")
+background_image = pygame.image.load("assets/images/menubackground.jpg")
 background_image = pygame.transform.scale(background_image, (WIDTH, HEIGHT))
 
 # Load and scale spaceship images
-spaceship_1 = pygame.image.load("Game Files/assets/images/spaceship_1.png")
+spaceship_1 = pygame.image.load("assets/images/spaceship_1.png")
 spaceship_1 = pygame.transform.scale(spaceship_1, (150,150))
-spaceship_2 = pygame.image.load("Game Files/assets/images/spaceship_2.png")
+spaceship_2 = pygame.image.load("assets/images/spaceship_2.png")
 spaceship_2 = pygame.transform.scale(spaceship_2, (150,150))
-spaceship_3 = pygame.image.load("Game Files/assets/images/spaceship_3.png")
+spaceship_3 = pygame.image.load("assets/images/spaceship_3.png")
 spaceship_3 = pygame.transform.scale(spaceship_3, (150,150))
 
 # Default ship image file and other default settings
-ship_image_file = "Game Files/assets/images/spaceship_1.png" 
+ship_image_file = "assets/images/spaceship_1.png" 
 question_series = "ACM Ethics"
 asteroid_count = 10
 
@@ -87,17 +87,17 @@ def edit_settings(screen):
                         ship_updated = True
                         print(ship_updated)
                         selected_ship = "ship1"
-                        ship_image_file = "Game Files/assets/images/spaceship_1.png"
+                        ship_image_file = "assets/images/spaceship_1.png"
                     elif ship_box_2.collidepoint(mouse_pos):
                         ship_updated = True
                         print(ship_updated)
                         selected_ship = "ship2"
-                        ship_image_file = "Game Files/assets/images/spaceship_2.png"
+                        ship_image_file = "assets/images/spaceship_2.png"
                     elif ship_box_3.collidepoint(mouse_pos):
                         ship_updated = True
                         print(ship_updated)
                         selected_ship = "ship3"
-                        ship_image_file = "Game Files/assets/images/spaceship_3.png"
+                        ship_image_file = "assets/images/spaceship_3.png"
 
                     # Handle other button clicks
                     elif questions_on_rect.collidepoint(mouse_pos) and not questions_on:
