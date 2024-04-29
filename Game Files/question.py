@@ -1,3 +1,14 @@
+"""
+File: question.py
+Author: Calvin Leavy, Ahmed Krubally, Michelle Orro, Tailor Burkham
+
+Description:
+This file contains functions for editing questions including: load_questions,
+get_series_list, add_new_series, edit_question_field, delete_question_from_series,
+new_question, change_question_type, change_correct_answer, and edit_answer_choice.
+It also displays questions during gameplay and handles answering the question.
+
+"""
 import json
 import random
 import pygame
@@ -5,11 +16,30 @@ import settings as s
 import utilities as u
 
 def load_questions(filename, series):
+    """
+    Load questions data from a JSON file.
+
+    Args:
+        filename (str): The name of the JSON file.
+        series (str): The name of the question series.
+
+    Returns:
+        list: The list of questions data.
+    """
     with open(filename, "r") as file:
         questions_data = json.load(file)
     return questions_data[series]
 
 def get_series_list(filename="Game Files/data/questions.json"):
+    """
+    Get the list of question series from a JSON file.
+
+    Args:
+        filename (str, optional): The name of the JSON file. Defaults to "Game Files/data/questions.json".
+
+    Returns:
+        list: The list of question series.
+    """
     with open(filename, "r") as file:
         data = json.load(file)
     
@@ -17,20 +47,42 @@ def get_series_list(filename="Game Files/data/questions.json"):
     return series_names
 
 def add_new_series(name, filename="Game Files/data/questions.json"):
-    # Load existing JSON data
+    """
+    Add a new question series to a JSON file.
+
+    Args:
+        name (str): The name of the new series.
+        filename (str, optional): The name of the JSON file. Defaults to "Game Files/data/questions.json".
+
+    Returns:
+        None
+    """
+    # Load existing data
     with open(filename, "r") as file:
         data = json.load(file)
 
     # Add a new key-value pair
     data[name] = []
 
-    # Save the updated JSON data back to the file
+    # Save the updated data back to the file
     with open(filename, "w") as file:
         json.dump(data, file, indent=4)
 
     print(f"New series '{name}' added to questions.json") 
 
-def edit_question_field(new_question, index, series, filename="Game Files/data/questions.json"):
+def edit_question_field(new_question, index, series):
+    """
+    Edits data in the question field
+
+    Args:
+        new_question (str): The new question data to be added.
+        index (int): The index for the question to be edited.
+        series (str): The name of the series the question is being edited.
+
+    Returns:
+        None
+    """
+
     with open("Game Files/data/questions.json", "r") as file:
         data = json.load(file)
 
@@ -39,7 +91,18 @@ def edit_question_field(new_question, index, series, filename="Game Files/data/q
     with open("Game Files/data/questions.json", "w") as file:
         json.dump(data, file, indent=4)
       
-def delete_question_from_series(index, series, filename="Game Files/data/questions.json"):
+def delete_question_from_series(index, series):
+    """
+    Deletes an entire question from a series
+
+    Args:
+        index (int): The index for the question to be deleted.
+        series (str): The name of the series the question is being deleted.
+
+    Returns:
+        None
+    """
+
     with open("Game Files/data/questions.json", "r") as file:
         data = json.load(file)
 
@@ -48,7 +111,17 @@ def delete_question_from_series(index, series, filename="Game Files/data/questio
     with open("Game Files/data/questions.json", "w") as file:
         json.dump(data, file, indent=4)
 
-def new_question(series, filename="Game Files/data/questions.json"):
+def new_question(series):
+    """
+    Creates a new_question in a series and fills it with default data
+
+    Args:
+        series (str): The name of the series the new question is added
+
+    Returns:
+        None
+    """
+
     with open("Game Files/data/questions.json", "r") as file:
         data = json.load(file)
 
@@ -64,7 +137,19 @@ def new_question(series, filename="Game Files/data/questions.json"):
     with open("Game Files/data/questions.json", "w") as file:
         json.dump(data, file, indent=4)
 
-def change_question_type(type, index, series, filename="Game Files/data/questions.json"):
+def change_question_type(type, index, series):
+    """
+    Changes the type of question in the series
+
+    Args:
+        type (int): Type of question True/False(1) or Multiple Choice(0)
+        index (int): The index for the question to be edited.
+        series (str): The name of the series the question is being edited.
+
+    Returns:
+        None
+    """
+
     with open("Game Files/data/questions.json", "r") as file:
         data = json.load(file)
 
@@ -76,7 +161,19 @@ def change_question_type(type, index, series, filename="Game Files/data/question
     with open("Game Files/data/questions.json", "w") as file:
         json.dump(data, file, indent=4)
 
-def change_correct_answer(answer, index, series, filename="Game Files/data/questions.json"):
+def change_correct_answer(answer, index, series):
+    """
+    Changes the correct answer for a question in the series
+
+    Args:
+        answer (str): The answer data for the question
+        index (int): The index for the question to be edited.
+        series (str): The name of the series the question is being edited.
+
+    Returns:
+        None
+    """
+
     with open("Game Files/data/questions.json", "r") as file:
         data = json.load(file)
 
@@ -86,6 +183,19 @@ def change_correct_answer(answer, index, series, filename="Game Files/data/quest
         json.dump(data, file, indent=4)
 
 def edit_answer_choice(answer, choice_index, index, series):
+    """
+    Edits the answer choices for a question in the series
+
+    Args:
+        answer (str): The answer data for the question
+        choice_index (int): for multiple choice, selects which choice is being edited
+        index (int): The index for the question to be edited.
+        series (str): The name of the series the question is being edited.
+
+    Returns:
+        None
+    """
+
     with open("Game Files/data/questions.json", "r") as file:
         data = json.load(file)
 
@@ -95,6 +205,17 @@ def edit_answer_choice(answer, choice_index, index, series):
         json.dump(data, file, indent=4)
         
 def display_question(screen, questions):
+    """
+    Display a randomly selected question on the screen.
+
+    Args:
+        screen: The Pygame display surface.
+        questions (list): The list of questions data.
+
+    Returns:
+        bool: True if the selected answer is correct, False otherwise.
+    """
+
     # Choose a random question
     question_data = random.choice(questions)
     question = question_data["question"]
@@ -106,11 +227,13 @@ def display_question(screen, questions):
     font = pygame.font.Font(None, 36)
     small_font = pygame.font.Font(None, 24)
 
+    # Sets question box size based off question data
     num_choices = len(choices) if type == "multiple-choice" else 2
-    question_box_height = 200 + num_choices * 50  # Base height + height for each choice
+    question_box_height = 200 + num_choices * 50 
 
     question_box_width = 800
     
+    # Centers question box
     question_box_x = (s.WIDTH - question_box_width) // 2
     question_box_y = (s.HEIGHT - question_box_height) // 2
     
@@ -128,7 +251,7 @@ def display_question(screen, questions):
     question_surface = u.render_textrect(question, font, question_box_rect.inflate(-20, -20), s.WHITE, s.BLACK)
     screen.blit(question_surface, question_box_rect.inflate(-20, -20).topleft)
 
-    # Render the options
+    # Render the answer boxes
     option_rects = []
     y = 200
     if type == "multiple-choice":

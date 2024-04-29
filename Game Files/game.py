@@ -1,5 +1,4 @@
 import pygame
-
 import settings as s
 import game_over_screen
 import high_scores
@@ -193,9 +192,9 @@ def game(screen):
                     ship_group.draw(screen)
                 
                 # Update the highest score if the current score is higher
-                # if score > highest_score:
-                # highest_score = score
-                # high_scores.save_high_score(highest_score)
+                if score > highest_score:
+                    highest_score = score
+                    high_scores.save_high_score(highest_score)
                 
                 # Render question result
                 if result_timer > 0:
