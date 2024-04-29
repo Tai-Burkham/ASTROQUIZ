@@ -1,3 +1,15 @@
+"""
+File: game.py
+Author: Calvin Leavy, Ahmed Krubally, Michelle Orro, Tailor Burkham
+
+Description:
+This file is where the game is controlled from. It handles all screen activity
+as well as all user input during gameplay. This file takes in data from settings.py,
+ship.py, asteroid.py, explosion.py, and high_scores.py. After game is over it calls
+game_over_screen.py and handles its inputs.
+
+"""
+
 import pygame
 import settings as s
 import game_over_screen
@@ -14,24 +26,46 @@ BLACK = (0, 0, 0)
 WHITE = (255, 255, 255)
 RED = (255, 0, 0)
 
+# Load background image
 background_image = pygame.image.load("Game Files/assets/images/BG.jpg")
 background_image = pygame.transform.scale(background_image, (s.WIDTH, s.HEIGHT))
+
+# Load health Icon image
 health_image = pygame.image.load("Game Files/assets/images/health_heart.png")
 health_image = pygame.transform.scale(health_image, (40, 40))
 
+# Initializes ship sprite
 ship = Ship()
 ship_group = pygame.sprite.Group()
 ship_group.add(ship)
 
-# generate asteroids
+# Generates asteroids
 asteroid_group = pygame.sprite.Group()
 def generate_asteroids(num_asteroids = 10):
+    """
+    Generates asteroid sprites
+
+    Args:
+        num_asteroids(int): Number of asteroids to be generated
+
+    Returns:
+        None
+    """
     for _ in range(num_asteroids):
         asteroid = Asteroid()
         asteroid_group.add(asteroid)
 
 # Main game method
 def game(screen):
+    """
+    The main game loop.
+
+    Args:
+        screen: The Pygame display surface.
+
+    Returns:
+        None
+    """
     global game_over, ship_lives, score
     
     # Initialize score variable
@@ -45,17 +79,21 @@ def game(screen):
     game_over = False
     game_paused = False
     
-    # Initialize player lives, adjust as needed for debugging
+    # Initialize player lives
     ship_lives = 1
+
+    # Initialize laser settings
     laser_cooldown = 0
     laser_count = 0
     
+    # Initialize score settings
     asteroids_destroyed = 0
     correct_answer = False
     num_correct = 0
     num_questions = 0
-    generate_asteroids()
     result_timer = 0
+
+    generate_asteroids()
 
     # Initial movement variables
     forward = False
@@ -72,7 +110,7 @@ def game(screen):
         explosion_group = pygame.sprite.Group()
         
         while not game_over:
-            # Handles events, This is where all mouse and keyboard inputs will be
+            # Handles events
             for event in pygame.event.get():
                 if event.type == pygame.QUIT:
                     return
@@ -91,8 +129,7 @@ def game(screen):
                          firing = True
                     if event.key == pygame.K_p:
                         game_paused = not game_paused
-                    # Need to impliment:
-                    # Mouse and/or keyboard input for questions 
+
                 elif event.type == pygame.KEYUP:
                     if event.key == pygame.K_w or event.key == pygame.K_s or event.key == pygame.K_UP or event.key == pygame.K_DOWN:
                         forward = False
@@ -112,9 +149,11 @@ def game(screen):
 
                 # Ship Movement 
                 ship.update(forward, reverse, left_turn, right_turn) 
+
                 # Laser Movement
                 laser_group.update() 
 
+                # Updates explosions for destroyed asteroids
                 explosion_group.update()
 
                 # Interactions
@@ -123,20 +162,26 @@ def game(screen):
                     # Fire a burst of lasers
                     laser = Laser(ship.rect.center, ship.angle)
                     laser_group.add(laser)
+
+                    # Reduce score for every laser shot
                     score -= 1
                     laser_count += 1
+                    
+                    # After 10 shots fired begin weapon cooldown
                     if laser_count >= 10:
-                        laser_cooldown = 15 # Adjust this for cooldown time 30 is 1 second
+                        laser_cooldown = 15 
                         laser_count = 0
+
                 # Update the laser cooldown
                 if laser_cooldown > 0:
                     laser_cooldown -= 1    
 
-                # Handle collisions with ship and asteroid
+                # Handle collisions with ship and asteroid and reduce lives
                 collision_occured = ship.handle_collisions(ship, asteroid_group)
                 if collision_occured:
-                    print("Collision detected! Lives:%s" %ship_lives)
                     ship_lives -= 1
+                
+                # Handle ship invulnerability cooldown
                 ship.update_invulnerability()
                 
                 # If a laser hits an asteroid, create an explosion and remove the asteroid
@@ -148,32 +193,35 @@ def game(screen):
                             # Increment asteroids destroyed count
                             asteroids_destroyed += 1
                             
-                            # Check for question call
+                            # Call questions based off amount of asteroids destroyed
                             if asteroids_destroyed % 7 == 0: # change frequency of questions
                                 num_questions += 1
                                 correct_answer = display_question(screen, questions)
 
-                                # if correct answer increase score, score multiplier, and if health is low add one
+                                # If correct answer increase score, score multiplier, and if health is low add one
                                 if correct_answer == True:
                                     score += 1000
                                     score_multiplier += 1
                                     num_correct += 1
                                     if ship_lives < 3:
                                         ship_lives += 1
+                                # If wrong answer
                                 else:
                                     score -= 1000
                                     score_multiplier = 1
                                 
-                                # for rendering results on screen
+                                # Timer for rendering question results on top of screen
                                 result_timer = 60
 
                             # Create an explosion at the asteroid's position
                             explosion = Explosion(asteroid.rect.center)
                             explosion_group.add(explosion) 
 
-                            # Increment score
+                            # Increment score and remove laser
                             score += (100 * score_multiplier)
                             laser.kill()
+
+                            # Replace destroyed asteroid
                             generate_asteroids(1)
                     
                 laser_group = pygame.sprite.Group([laser for laser in laser_group if laser.lifetime > 0])
@@ -182,7 +230,7 @@ def game(screen):
                 # Add background image
                 screen.blit(background_image, (0, 0))
 
-                #drawing all the assest
+                # Drawing all the assets
                 asteroid_group.draw(screen)
                 laser_group.draw(screen) 
                 explosion_group.draw(screen)
@@ -196,7 +244,7 @@ def game(screen):
                     highest_score = score
                     high_scores.save_high_score(highest_score)
                 
-                # Render question result
+                # Render question result on top center of screen
                 if result_timer > 0:
                     result_timer -= 1
                     if correct_answer == True:
@@ -207,7 +255,7 @@ def game(screen):
 
                 # Render the cureent score
                 score_text = font.render(f"Score: {score} x {score_multiplier}", True, (255, 0, 0))
-                screen.blit(score_text, (10, 10))  # Position score text at top left corner
+                screen.blit(score_text, (10, 10))  
 
                 # Render health hearts
                 x_offset = 0
@@ -229,6 +277,7 @@ def game(screen):
         # Reposition the ship in the middle of the screen
         ship.rect.centerx = s.WIDTH // 2
         ship.rect.centery = s.HEIGHT // 2
+
         # Put up game over screen and initialize buttons
         play_again_button_rect, main_menu_button_rect = game_over_screen.game_over_screen(screen, score, num_correct, num_questions)
 

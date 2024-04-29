@@ -36,6 +36,16 @@ background_image = pygame.transform.scale(background_image, (s.WIDTH, s.HEIGHT))
 
 # Function to display the main menu and return clickable boxes
 def main_menu():
+    """
+    Displays the main menu and returns clickable boxes for menu buttons.
+
+    Returns:
+        play_button_rect: The rectangle representing the "Play Game" button.
+        high_scores_button_rect: The rectangle representing the "High Scores" button.
+        edit_questions_button_rect: The rectangle representing the "Edit Questions" button.
+        edit_settings_button_rect: The rectangle representing the "Edit Settings" button.
+        quit_button_rect: The rectangle representing the "Quit" button.
+    """
     # Display the background image
     screen.fill(s.WHITE)
     screen.blit(background_image, (0, 0))

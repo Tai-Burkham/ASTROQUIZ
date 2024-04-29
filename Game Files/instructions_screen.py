@@ -1,17 +1,34 @@
+"""
+File: instructions_screen.py
+Author: Calvin Leavy, Ahmed Krubally, Michelle Orro, Tailor Burkham
+
+Description:
+This displays the instructions for gameplay and waits for any input to
+dismiss.
+
+"""
 import pygame
 import settings as s
-import utilities as u
 
-
+# Load the background image
 background_image = pygame.image.load("Game Files/assets/images/menubackground.jpg")
 background_image = pygame.transform.scale(background_image, (s.WIDTH, s.HEIGHT))
 
 def instructions_screen(screen):
-    # Clear the screen
-    # screen.fill(s.BLACK)
+    """
+    Display the instructions screen.
 
-    # loads background image
+    Args:
+        screen: The Pygame display surface.
+
+    Returns:
+        None
+    """
+
+    # Loads background image
     screen.fill(s.WHITE)
+
+    # Blit the background image onto the screen
     screen.blit(background_image, (0, 0))
     
     # Render and center the instruction text
@@ -41,11 +58,11 @@ def instructions_screen(screen):
 
     pygame.display.flip()
 
-    # Wait for any key press to continue
+    # Wait for any key press or mouse click to continue
     waiting = True
     while waiting:
         for event in pygame.event.get():
-            if event.type == pygame.KEYDOWN:
+            if event.type == pygame.KEYDOWN or event.type == pygame.MOUSEBUTTONDOWN:
                 waiting = False
             elif event.type == pygame.QUIT:
                 pygame.quit()

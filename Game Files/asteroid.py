@@ -1,3 +1,12 @@
+"""
+File: asteroid.py
+Author: Calvin Leavy, Ahmed Krubally, Michelle Orro, Tailor Burkham
+
+Description:
+This file handles the class for asteroid including its movement and
+generation.
+
+"""
 import pygame
 import math
 import random

@@ -1,7 +1,22 @@
+"""
+File: Explosion.py
+Author: Calvin Leavy, Ahmed Krubally, Michelle Orro, Tailor Burkham
+
+Description:
+Handles explosions on asteroid destruction
+
+"""
 import pygame
 
 class Explosion(pygame.sprite.Sprite):
     def __init__(self, position, duration=0.25):
+        """
+        Initializes an explosion sprite.
+
+        Args:
+            position: The position where the explosion will occur.
+            duration: The duration of the explosion animation in seconds. Default is 0.25 seconds.
+        """
         super().__init__()
         self.images = []  # List to hold the explosion animation frames
         self.index = 0    # Current index of the image being displayed
@@ -12,12 +27,18 @@ class Explosion(pygame.sprite.Sprite):
         self.start_time = pygame.time.get_ticks()  # Record the start time of the explosion
 
     def load_images(self):
+        """
+        Loads the explosion animation frames.
+        """
         for i in range(6):  # Assuming there are 6 frames in your explosion animation
             img = pygame.image.load(f"Game Files/assets/images/explosion{i}.png")  # Load each frame
             img = pygame.transform.scale(img, (100, 100))  # Scale the image if needed
             self.images.append(img)  # Append the image to the list of frames
 
     def update(self):
+        """
+        Updates the explosion animation.
+        """
         now = pygame.time.get_ticks()  # Get the current time
         elapsed = (now - self.start_time) / 1000  # Convert milliseconds to seconds
 

@@ -1,8 +1,30 @@
+"""
+File: game_over_screen.py
+Author: Calvin Leavy, Ahmed Krubally, Michelle Orro, Tailor Burkham
+
+Description:
+Displays the game over screen which shows score data and provides buttons
+for playing again or returning to the main menu.
+
+"""
 import pygame
 import settings as s
 import utilities as u
 
 def game_over_screen(screen, score, num_correct, num_questions):
+    """
+    Displays the game over screen.
+
+    Args:
+        screen: The Pygame display surface.
+        score (int): The player's final score.
+        num_correct (int): The number of questions answered correctly.
+        num_questions (int): The total number of questions answered.
+
+    Returns:
+        play_again_button_rect: The rectangle representing the "Play Again" button.
+        main_menu_button_rect: The rectangle representing the "Main Menu" button.
+    """
     button_width = 180
     button_height = 60
     button_spacing = 20

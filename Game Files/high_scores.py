@@ -1,16 +1,32 @@
+"""
+File: high_scores.py
+Author: Calvin Leavy, Ahmed Krubally, Michelle Orro, Tailor Burkham
+
+Description:
+This file displays the high score screen and the high scores as well
+as saves new high scores.
+"""
 import pygame
 import settings as s
 import utilities as u
-#from settings import WIDTH, HEIGHT, WHITE, BLACK, FONT
 
+# Load the background image
 background_image = pygame.image.load("Game Files/assets/images/menubackground.jpg")
 background_image = pygame.transform.scale(background_image, (s.WIDTH, s.HEIGHT))
 
+# Define the back button
 back_button = pygame.Rect(50, 500, 100, 50)
 
 # Font initialization
-font = pygame.font.Font(None, 36)  # You can adjust the font size as needed
+font = pygame.font.Font(None, 36)
+
 def load_high_score():
+    """
+    Load high scores from a file.
+
+    Returns:
+        list: A list of high scores.
+    """
     try:
         with open("high_scores.txt", "r") as file:
          scores_str = file.read()  # Read the entire content of the file
@@ -22,6 +38,15 @@ def load_high_score():
         return 0
 
 def save_high_score(score):
+    """
+    Save a new high score to a file.
+
+    Args:
+        score (int): The new high score to save.
+
+    Returns:
+        None
+    """
     # Read existing high scores from the file
     try:
         with open("high_score.txt", "r") as file:
@@ -46,6 +71,15 @@ def save_high_score(score):
 
 
 def view_high_score(screen):
+    """
+    Display the high scores on the screen.
+
+    Args:
+        screen: The Pygame display surface.
+
+    Returns:
+        None
+    """
     running = True
     global back_button
 
@@ -86,5 +120,3 @@ def view_high_score(screen):
             u.outline_text(screen, "No high scores recorded", 36, s.FONT)
 
         pygame.display.flip()
-    # Example usage of destroy_asteroid function
-# Call destroy_asteroid whenever an asteroid is destroyed
