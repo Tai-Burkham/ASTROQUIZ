@@ -1,35 +1,26 @@
 # ASTROQUIZ
 
-Github for Astroquiz
+## Description
 
-## Todo
-### General
-- Comments throughout code.
-- Comment out code that sends notifications to the console after testing is complete.
-- We need music for the game. Doesnt have to be anything fancy just music that either starts when play game is selected or when the game starts on main menu.
+ASTROQUIZ is an interactive quiz game where players can test their knowledge about ACM Ethics and other topics to study. The game features multiple-choice questions, high score tracking, and options to customize questions and edit settings.
 
-### Main
-- Need to add instructions on how to play the game as either a pop up after you hit play game or as static information on the main menu page. [DONE]
+## Authors
+- Calvin Leavy
+- Ahmed Krubally
+- Michelle Orro
+- Tailor Burkham
+  
+## Getting Started 
+1. Installation: Clone or download the ASTROQUIZ Repository to your local machine.
+2. Dependencies: ASTROQUIZ requires Python and Pygame. Install Python from python.org and Pygame using 'pip install pygame'.
+3. Running the Game: Run ASTROQUIZ
+4. Main Menu: Navigate through the main menu using the keyboard shortcuts or mouse clicks. Choose options such as "Play Game" to start the game, "High Scores" to view the top scores, "Edit Questions" to customize quiz questions, "Edit Settings" to modify game settings, or "Quit to exit the game.
+5. Gameplay: To play the game use the spacebar to shoot and WASD to move around the screen. Shoot as many asteroids as you can to get the highest score possible. Destroy asteroids to prompt questions. Getting hit by an asteroid makes you lose health, lose too much health and its game over.
+6. Edit Questions: To edit questions just pick the question series where you want to edit the questions and click on the boxes that contain the content you would like ot edit.
 
-### Game
-- Need to add sound effects for game. We need sound for shooting, asteroid destruction, and ship destruction/damage. Use audacity to edit sound files. They should be either .mp3 or .wav
-- Clean up and comment code
-- High Scores need to be recorded correctly to the high_scores.json file
-- Lastly change the amount of asteroids it takes to cause a question from 2 to 7
-
-### High Scores
-- We need 3 columns at least where it shows the players score, how many questions correct/incorrect, and which question set was used.
-- We need a title for that slide
-- We need to add a main menu button on the bottom right of the page.
-- Refer to edit questions for formatting ideas
-
-### Settings
-- Current ship is stuck on ship3. It should be able to be changed in the settings and when you leave the settings and go back again it should remain on the selected ship. [DONE]
-- Need to add a default button for settings.
-- Need to add a save button for settings [DONE]
-- Need to add a return to menu button on the bottom right of screen [DONE]
-- Need to restore ACM Ethics questions when restore default button is pressed.
-- Need to add a variable for asteroid count to settings. on easy asteroid count should be 10 on hard asteroid coutn should be 15.
-
-### Edit Questions
-- Need to add a main menu button on the bottom left. Move up the button and the box that is there now to make room for it. [DONE]
+## Features
+- Interactive quiz gamplay
+- Multiple-choice questions or True/False questions
+- High score tracking
+- Customizable settings and questions
+- User-friendly menu interface
