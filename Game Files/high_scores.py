@@ -1,6 +1,6 @@
 """
 File: high_scores.py
-Author: Calvin Leavy, Ahmed Krubally, Michelle Orro, Tailor Burkham
+Author: Calvin Leavy, Ahmed Krubally, Michelle Orru, Tailor Burkham
 
 Description:
 This file displays the high score screen and the high scores as well

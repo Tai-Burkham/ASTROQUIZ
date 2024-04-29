@@ -1,6 +1,6 @@
 """
 File: ship.py
-Author: Calvin Leavy, Ahmed Krubally, Michelle Orro, Tailor Burkham
+Author: Calvin Leavy, Ahmed Krubally, Michelle Orru, Tailor Burkham
 
 Description:
 Module for ship and laser classes, handling ship movement, 

@@ -1,6 +1,6 @@
 """
 File: utilities.py
-Author: Calvin Leavy, Ahmed Krubally, Michelle Orro, Tailor Burkham
+Author: Calvin Leavy, Ahmed Krubally, Michelle Orru, Tailor Burkham
 
 Description:
 Utility functions for the game, including text wrapping and rendering.

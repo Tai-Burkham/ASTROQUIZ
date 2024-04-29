@@ -1,6 +1,6 @@
 """
 File: instructions_screen.py
-Author: Calvin Leavy, Ahmed Krubally, Michelle Orro, Tailor Burkham
+Author: Calvin Leavy, Ahmed Krubally, Michelle Orru, Tailor Burkham
 
 Description:
 This displays the instructions for gameplay and waits for any input to

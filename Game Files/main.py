@@ -1,6 +1,6 @@
 """
 File: main.py
-Author: Calvin Leavy, Ahmed Krubally, Michelle Orro, Tailor Burkham
+Author: Calvin Leavy, Ahmed Krubally, Michelle Orru, Tailor Burkham
 
 Description:
 This file serves as the main entry point for the ASTROQUIZ game.

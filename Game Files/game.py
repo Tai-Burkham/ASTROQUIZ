@@ -1,6 +1,6 @@
 """
 File: game.py
-Author: Calvin Leavy, Ahmed Krubally, Michelle Orro, Tailor Burkham
+Author: Calvin Leavy, Ahmed Krubally, Michelle Orru, Tailor Burkham
 
 Description:
 This file is where the game is controlled from. It handles all screen activity

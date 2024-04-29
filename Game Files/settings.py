@@ -1,6 +1,6 @@
 """
 File: settings.py
-Author: Calvin Leavy, Ahmed Krubally, Michelle Orro, Tailor Burkham
+Author: Calvin Leavy, Ahmed Krubally, Michelle Orru, Tailor Burkham
 
 Description:
 This file handles the settings for the game and is used across the game

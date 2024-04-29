@@ -7,7 +7,7 @@ ASTROQUIZ is an interactive quiz game where players can test their knowledge abo
 ## Authors
 - Calvin Leavy
 - Ahmed Krubally
-- Michelle Orro
+- Michelle Orru
 - Tailor Burkham
   
 ## Getting Started 

@@ -1,6 +1,6 @@
 """
 File: edit_questions.py
-Author: Calvin Leavy, Ahmed Krubally, Michelle Orro, Tailor Burkham
+Author: Calvin Leavy, Ahmed Krubally, Michelle Orru, Tailor Burkham
 
 Description:
 This file displays the edit question screen. On this screen users can edit,

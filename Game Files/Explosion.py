@@ -1,6 +1,6 @@
 """
 File: Explosion.py
-Author: Calvin Leavy, Ahmed Krubally, Michelle Orro, Tailor Burkham
+Author: Calvin Leavy, Ahmed Krubally, Michelle Orru, Tailor Burkham
 
 Description:
 Handles explosions on asteroid destruction

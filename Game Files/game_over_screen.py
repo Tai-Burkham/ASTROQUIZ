@@ -1,6 +1,6 @@
 """
 File: game_over_screen.py
-Author: Calvin Leavy, Ahmed Krubally, Michelle Orro, Tailor Burkham
+Author: Calvin Leavy, Ahmed Krubally, Michelle Orru, Tailor Burkham
 
 Description:
 Displays the game over screen which shows score data and provides buttons
