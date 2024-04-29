@@ -36,9 +36,10 @@ questions_on = True
 music_on = True
 sound_on = True
 hard_difficulty = False
+ship_updated = False
 
 def edit_settings(screen):
-    global questions_on, music_on, sound_on, hard_difficulty, selected_ship, ship_image_file, save_button, back_button
+    global questions_on, music_on, sound_on, hard_difficulty, selected_ship, ship_image_file, save_button, back_button, ship_updated
 
     running = True
     while running:
@@ -52,12 +53,18 @@ def edit_settings(screen):
             elif event.type == pygame.MOUSEBUTTONDOWN:
                     mouse_pos = pygame.mouse.get_pos()
                     if ship_box_1.collidepoint(mouse_pos):
+                        ship_updated = True
+                        print(ship_updated)
                         selected_ship = "ship1"
                         ship_image_file = "Game Files/assets/images/spaceship_1.png"
                     elif ship_box_2.collidepoint(mouse_pos):
+                        ship_updated = True
+                        print(ship_updated)
                         selected_ship = "ship2"
                         ship_image_file = "Game Files/assets/images/spaceship_2.png"
                     elif ship_box_3.collidepoint(mouse_pos):
+                        ship_updated = True
+                        print(ship_updated)
                         selected_ship = "ship3"
                         ship_image_file = "Game Files/assets/images/spaceship_3.png"
                 

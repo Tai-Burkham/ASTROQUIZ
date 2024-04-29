@@ -1,6 +1,5 @@
 import pygame
 import math
-import time
 import settings as s
 
 ACCELERATION = 0.5
@@ -55,6 +54,7 @@ class Ship(pygame.sprite.Sprite):
             self.original_image = pygame.transform.rotate(self.original_image, -90)
     
     def update_ship_image(self):
+        s.ship_updated = False
         self.load_ship_image()
         if self.original_image is not None:
             self.original_image = pygame.transform.scale(self.original_image, (75, 75))
@@ -65,7 +65,8 @@ class Ship(pygame.sprite.Sprite):
 
     def update(self, forward, reverse, left_turn, right_turn):
         global is_blinking
-        self.update_ship_image()
+        if s.ship_updated:
+            self.update_ship_image()
         # Rotate the ship, adjust self.angle for turning speed
         if left_turn:
             self.angle -= 5
