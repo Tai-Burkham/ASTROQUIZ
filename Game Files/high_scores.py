@@ -3,11 +3,10 @@ import settings as s
 import utilities as u
 #from settings import WIDTH, HEIGHT, WHITE, BLACK, FONT
 
-
-
 background_image = pygame.image.load("Game Files/assets/images/menubackground.jpg")
 background_image = pygame.transform.scale(background_image, (s.WIDTH, s.HEIGHT))
 
+back_button = pygame.Rect(50, 500, 100, 50)
 
 # Font initialization
 font = pygame.font.Font(None, 36)  # You can adjust the font size as needed
@@ -48,15 +47,24 @@ def save_high_score(score):
 
 def view_high_score(screen):
     running = True
+    global back_button
+
     while running:
         count =1
         # Handles events, This is where all mouse and keyboard inputs will be
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
-                running = False
+                running = False  
+            elif event.type == pygame.MOUSEBUTTONDOWN:
+                mouse_pos = pygame.mouse.get_pos()
+                if back_button.collidepoint(mouse_pos):
+                    running = False 
+        
         
         screen.fill(s.WHITE)
         screen.blit(background_image, (0, 0))
+
+        # Handles events, This is where all mouse and keyboard inputs will be
         
         try:
             with open("high_score.txt", "r") as file:
@@ -70,6 +78,8 @@ def view_high_score(screen):
                         u.outline_text(screen, score_text, (36 + y_offset), s.FONT)
                         y_offset += 50  # Increment Y offset for next score
                         count += 1
+
+                        back_button = u.outline_text_w_box(screen, "BACK", 550, s.FONT, -340)
                 else:
                     u.outline_text(screen, "No high scores recorded", 36, s.FONT)
         except FileNotFoundError:
