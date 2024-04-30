@@ -147,15 +147,15 @@
     ],
     "Test Series": [
         {
-            "type": "multiple-choice",
+            "type": "true-false",
             "question": "Right click on boxes to edit. Enter your question here. Choose the type of question below and enter in the possible choices for multiple choice and select the correct answer or select the correct answer for true and false.",
             "options": [
-                "asdwsdaass",
-                "asdww",
+                "",
+                "",
                 "",
                 ""
             ],
-            "correct_answer": "asdww"
+            "correct_answer": "True"
         }
     ]
 }

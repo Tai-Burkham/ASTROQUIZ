@@ -1,2 +1,2 @@
-selected_ship=ship3
-ship_image_file=assets/images/spaceship_3.png
+selected_ship=ship2
+ship_image_file=assets/images/spaceship_2.png
