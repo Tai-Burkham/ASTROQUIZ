@@ -11,6 +11,7 @@ game_over_screen.py and handles its inputs.
 """
 
 import pygame
+import sys
 import settings as s
 import game_over_screen
 import high_scores
@@ -38,6 +39,9 @@ health_image = pygame.transform.scale(health_image, (40, 40))
 ship = Ship()
 ship_group = pygame.sprite.Group()
 ship_group.add(ship)
+
+# Load Sound
+sound_Explosion = pygame.mixer.Sound("assets/audio/soundEffects/explosion-91872.mp3")
 
 # Generates asteroids
 asteroid_group = pygame.sprite.Group()
@@ -179,6 +183,7 @@ def game(screen):
                 # Handle collisions with ship and asteroid and reduce lives
                 collision_occured = ship.handle_collisions(ship, asteroid_group)
                 if collision_occured:
+                    sound_Explosion.play()
                     ship_lives -= 1
                 
                 # Handle ship invulnerability cooldown
