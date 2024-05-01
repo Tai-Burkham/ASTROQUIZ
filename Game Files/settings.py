@@ -9,6 +9,7 @@ change the ship type, turn audio on or off, and change the game difficulty.
 
 """
 import pygame
+import sys
 import utilities as u
 
 pygame.init()
@@ -57,6 +58,9 @@ sound_on = True
 hard_difficulty = False
 ship_updated = False
 
+# Music and Sound
+music = pygame.mixer.music.load("assets/audio/Music/Starfox Visualizer.mp3")
+
 def edit_settings(screen):
     """
     Function to edit game settings and display settings screen.
@@ -71,6 +75,7 @@ def edit_settings(screen):
 
     running = True
     while running:
+        music.play()
         # Handles events
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
@@ -109,9 +114,9 @@ def edit_settings(screen):
                     elif sound_off_rect.collidepoint(mouse_pos) and sound_on:
                         sound_on = False
                     elif music_on_rect.collidepoint(mouse_pos) and not music_on:
-                        music_on = True
+                        music.set_volume(0.5)
                     elif music_off_rect.collidepoint(mouse_pos) and music_on:
-                        music_on = False
+                        music.set_volume(0.0)
                     elif hard_diff_rect.collidepoint(mouse_pos) and not hard_difficulty:
                         hard_difficulty = True
                     elif normal_diff_rect.collidepoint(mouse_pos) and hard_difficulty:
